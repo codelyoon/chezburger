@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Chezburger Games — Launching 2026</title>
   <meta name="description" content="Chezburger Games. A Roblox studio that builds games from your ideas. Coming 2026." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -20,7 +20,6 @@
       --lettuce: #6aaa3a;
       --ink: #1a140c;
       --muted: #9a8b6e;
-      --glow: #ffcc55;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html, body {
@@ -45,9 +44,8 @@
     .float-b {
       position: absolute;
       font-size: 28px;
-      opacity: .14;
+      opacity: .12;
       animation: drift linear infinite;
-      filter: drop-shadow(0 0 8px rgba(242,193,78,.25));
       user-select: none;
     }
     @keyframes drift {
@@ -59,49 +57,93 @@
       z-index: 1;
       max-width: 920px;
       margin: 0 auto;
-      padding: 48px 22px 80px;
+      padding: 36px 20px 72px;
     }
     header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 16px;
-      margin-bottom: 56px;
+      gap: 12px;
+      margin-bottom: 40px;
     }
     .mark {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       font-family: Outfit, sans-serif;
       font-weight: 800;
       letter-spacing: -0.03em;
-      font-size: 18px;
+      font-size: 16px;
+      white-space: nowrap;
     }
     .pill {
-      font-size: 11px;
-      letter-spacing: .16em;
+      font-size: 10px;
+      letter-spacing: .14em;
       text-transform: uppercase;
       border: 1px solid rgba(244,231,195,.25);
-      padding: 6px 10px;
+      padding: 6px 9px;
       color: var(--muted);
+      text-align: right;
+      line-height: 1.3;
     }
     .hero { text-align: center; }
+    .stack-wrap {
+      position: relative;
+      width: min(220px, 56vw);
+      height: 170px;
+      margin: 0 auto 18px;
+    }
     .stack {
-      width: 220px;
-      margin: 0 auto 28px;
+      width: 100%;
       cursor: pointer;
       transform-origin: 50% 80%;
-      transition: transform .25s ease;
+      transition: transform .22s ease, clip-path .2s ease;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+      position: relative;
     }
-    .stack:hover { transform: rotate(-4deg) scale(1.04); }
-    .stack.bite { animation: chomp .45s ease; }
+    .stack:hover { transform: rotate(-3deg) scale(1.04); }
+    .stack.chomp { animation: chomp .42s cubic-bezier(.2,1.4,.3,1); }
     @keyframes chomp {
-      0% { transform: scale(1); }
-      40% { transform: scale(.86) rotate(6deg); }
-      100% { transform: scale(1); }
+      0% { transform: scale(1) rotate(0); }
+      25% { transform: scale(.84) rotate(-7deg); }
+      55% { transform: scale(1.06) rotate(5deg); }
+      100% { transform: scale(1) rotate(0); }
     }
+    .stack.drop-in { animation: dropin .45s cubic-bezier(.2,1.1,.3,1); }
+    @keyframes dropin {
+      0% { transform: translateY(-70px) scale(.7) rotate(-12deg); opacity: 0; }
+      100% { transform: none; opacity: 1; }
+    }
+    .stack.eaten { animation: swallow .32s ease forwards; }
+    @keyframes swallow {
+      0% { transform: scale(1); opacity: 1; }
+      100% { transform: scale(.12) rotate(16deg); opacity: 0; }
+    }
+
+    /* one growing bite from the top-right — no leftover islands */
+    .stack.b1 {
+      clip-path: polygon(
+        0 0, 52% 0,
+        56% 9%, 44% 6%, 50% 20%,
+        36% 16%, 48% 34%,
+        100% 28%, 100% 100%,
+        0 100%
+      );
+    }
+    .stack.b2 {
+      clip-path: polygon(
+        0 0, 42% 0,
+        46% 11%, 34% 8%, 40% 24%,
+        22% 20%, 30% 48%,
+        12% 54%, 20% 100%,
+        0 100%
+      );
+    }
+
+    .sesame, .tomato, .cheese, .patty, .lettuce, .bottom { margin-left: auto; margin-right: auto; }
     .sesame {
-      width: 180px; height: 58px;
+      width: 82%; height: 58px;
       background: radial-gradient(circle at 30% 30%, #f0c57a, var(--bun) 45%, var(--bun-dark));
       border-radius: 90px 90px 28px 28px;
       position: relative;
@@ -115,112 +157,149 @@
       border-radius: 50%;
       top: 16px;
     }
-    .sesame::before { left: 38px; box-shadow: 36px 8px #fff6d8, 72px -2px #fff6d8, 20px 18px #fff6d8, 90px 14px #fff6d8; }
-    .sesame::after { left: 110px; top: 22px; box-shadow: -20px 10px #fff6d8, 18px -8px #fff6d8; }
-    .tomato { width: 168px; height: 16px; background: var(--tomato); margin-top: -6px; box-shadow: 0 6px 0 #8e241c; }
+    .sesame::before { left: 18%; box-shadow: 36px 8px #fff6d8, 72px -2px #fff6d8, 20px 18px #fff6d8, 90px 14px #fff6d8; }
+    .sesame::after { left: 58%; top: 22px; box-shadow: -20px 10px #fff6d8, 18px -8px #fff6d8; }
+    .tomato { width: 76%; height: 16px; background: var(--tomato); margin-top: -6px; box-shadow: 0 6px 0 #8e241c; }
     .cheese {
-      width: 176px; height: 14px;
+      width: 80%; height: 14px;
       background: var(--cheese);
       margin-top: -4px;
       clip-path: polygon(0 0, 100% 0, 96% 100%, 8% 100%);
       box-shadow: 0 8px 0 #c99620;
     }
     .patty {
-      width: 170px; height: 28px;
+      width: 77%; height: 28px;
       background: linear-gradient(#5a3320, var(--patty));
       margin-top: -4px;
       border-radius: 18px;
       box-shadow: 0 8px 0 #24140c;
     }
     .lettuce {
-      width: 186px; height: 14px;
+      width: 85%; height: 14px;
       background: var(--lettuce);
       margin-top: -6px;
-      border-radius: 0 0 40% 40%;
       clip-path: polygon(0 20%, 12% 0, 24% 30%, 38% 0, 52% 28%, 66% 0, 80% 26%, 100% 0, 100% 100%, 0 100%);
     }
     .bottom {
-      width: 178px; height: 28px;
+      width: 81%; height: 28px;
       background: linear-gradient(#c48b3a, #9a6420);
       border-radius: 16px 16px 40px 40px;
       margin-top: -4px;
       box-shadow: 0 16px 28px rgba(0,0,0,.5);
     }
+    .crumb {
+      position: absolute;
+      pointer-events: none;
+      font-size: 15px;
+      animation: crumb .7s ease-out forwards;
+    }
+    @keyframes crumb {
+      0% { opacity: 1; transform: translate(0,0) scale(1) rotate(0); }
+      100% { opacity: 0; transform: translate(var(--x), var(--y)) scale(.35) rotate(200deg); }
+    }
+
+    .tally {
+      display: none;
+      margin: 0 auto 14px;
+      font-size: 11px;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .tally.on { display: block; }
+    .tally b { color: var(--cheese); letter-spacing: 0; font-size: 13px; }
+
     .kicker {
-      font-size: 12px;
-      letter-spacing: .28em;
+      font-size: 11px;
+      letter-spacing: .18em;
       text-transform: uppercase;
       color: var(--cheese);
-      margin-bottom: 14px;
+      margin-bottom: 12px;
     }
     h1 {
       font-family: Outfit, sans-serif;
-      font-size: clamp(42px, 9vw, 86px);
+      font-size: clamp(40px, 12vw, 86px);
       line-height: .9;
       letter-spacing: -0.045em;
       font-weight: 800;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
     }
     h1 span { color: var(--cheese); }
     .sub {
-      font-size: 16px;
+      font-size: 15px;
       color: var(--muted);
       max-width: 520px;
-      margin: 0 auto 28px;
-      line-height: 1.55;
+      margin: 0 auto 22px;
+      line-height: 1.6;
     }
     .year {
       display: inline-flex;
       align-items: center;
       gap: 10px;
       border: 1px dashed rgba(242,193,78,.45);
-      padding: 10px 16px;
+      padding: 10px 14px;
       color: var(--paper);
-      margin-bottom: 48px;
+      margin-bottom: 28px;
+      font-size: 13px;
     }
     .year b { color: var(--cheese); }
     .grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 14px;
-      margin-bottom: 40px;
+      gap: 12px;
+      margin-bottom: 32px;
     }
-    @media (max-width: 680px) { .grid { grid-template-columns: 1fr; } }
     .card {
       background: rgba(244,231,195,.04);
       border: 1px solid rgba(244,231,195,.1);
-      padding: 22px 20px;
+      padding: 20px 18px;
       text-align: left;
     }
     .card h2 {
       font-family: Outfit, sans-serif;
-      font-size: 18px;
+      font-size: 17px;
       margin-bottom: 8px;
     }
     .card p { color: var(--muted); font-size: 13px; line-height: 1.55; }
     .emoji { font-size: 22px; display: block; margin-bottom: 10px; }
     .pitch {
       border: 1px solid rgba(242,193,78,.25);
-      padding: 28px 22px;
+      padding: 24px 18px;
       margin-bottom: 36px;
       background: linear-gradient(180deg, rgba(242,193,78,.06), transparent);
     }
     .pitch h2 {
       font-family: Outfit, sans-serif;
-      font-size: 22px;
+      font-size: clamp(20px, 5vw, 22px);
       margin-bottom: 10px;
     }
-    .pitch p { color: #cbb892; font-size: 14px; line-height: 1.65; max-width: 640px; }
+    .pitch p { color: #cbb892; font-size: 14px; line-height: 1.7; max-width: 640px; }
+    .reward {
+      margin-top: 12px;
+      color: var(--cheese);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+    .terms-link {
+      display: inline;
+      color: var(--muted);
+      font-size: 11px;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      cursor: pointer;
+      background: none;
+      border: 0;
+      padding: 0;
+      font-family: inherit;
+    }
+    .terms-link:hover { color: var(--paper); }
     form {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
       margin-top: 18px;
     }
-    input, textarea, button {
-      font-family: inherit;
-      font-size: 14px;
-    }
+    input, textarea, button { font-family: inherit; font-size: 16px; }
     input, textarea {
       background: #16130e;
       border: 1px solid rgba(244,231,195,.18);
@@ -228,32 +307,73 @@
       padding: 12px 14px;
       outline: none;
       min-width: 0;
+      width: 100%;
     }
-    input { flex: 1; min-width: 220px; }
-    textarea { width: 100%; min-height: 90px; resize: vertical; }
-    button {
+    input:focus, textarea:focus { border-color: var(--cheese); }
+    .row { display: flex; gap: 10px; width: 100%; }
+    .row input { flex: 1; width: auto; }
+    textarea { min-height: 110px; resize: vertical; }
+    button.send {
       background: var(--cheese);
       color: var(--ink);
       border: 0;
-      padding: 12px 18px;
+      padding: 14px 18px;
       font-weight: 700;
       cursor: pointer;
       letter-spacing: .04em;
+      width: 100%;
+      min-height: 48px;
     }
-    button:disabled { opacity: .6; cursor: wait; }
-    button:hover { filter: brightness(1.08); }
-    .note { margin-top: 10px; font-size: 11px; color: var(--muted); }
+    button.send:disabled { opacity: .6; cursor: wait; }
+    button.send:hover { filter: brightness(1.08); }
+
+    .follow {
+      margin-top: 28px;
+      padding-top: 22px;
+      border-top: 1px solid rgba(244,231,195,.1);
+    }
+    .follow h3 {
+      font-family: Outfit, sans-serif;
+      font-weight: 800;
+      font-size: 16px;
+      letter-spacing: -0.03em;
+      margin-bottom: 12px;
+    }
+    .socials {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .socials a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: Outfit, sans-serif;
+      font-weight: 800;
+      font-size: 14px;
+      letter-spacing: -0.03em;
+      color: var(--ink);
+      text-decoration: none;
+      background: var(--paper);
+      padding: 10px 14px;
+      min-height: 44px;
+    }
+    .socials a svg { width: 16px; height: 16px; fill: currentColor; flex-shrink: 0; }
+    .socials a.ig { background: #f4e7c3; }
+    .socials a.tt { background: var(--cheese); }
+    .socials a:hover { filter: brightness(1.06); }
+
     .wall {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
       justify-content: center;
-      margin: 28px 0 40px;
+      margin: 8px 0 28px;
     }
     .chip {
-      font-size: 22px;
+      font-size: 20px;
       line-height: 1;
-      opacity: .85;
+      opacity: .8;
       animation: wobble 3s ease-in-out infinite;
     }
     .chip:nth-child(odd) { animation-delay: .4s; }
@@ -265,12 +385,13 @@
       text-align: center;
       color: var(--muted);
       font-size: 12px;
-      line-height: 1.7;
+      line-height: 1.75;
+      padding: 0 8px;
     }
     footer a { color: var(--cheese); text-decoration: none; }
     .toast {
       position: fixed;
-      bottom: 24px;
+      bottom: max(20px, env(safe-area-inset-bottom));
       left: 50%;
       transform: translateX(-50%) translateY(20px);
       background: var(--cheese);
@@ -280,9 +401,74 @@
       opacity: 0;
       pointer-events: none;
       transition: .25s ease;
-      z-index: 9;
+      z-index: 12;
+      max-width: calc(100% - 32px);
+      text-align: center;
+      font-size: 13px;
     }
     .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    .modal-bg {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.72);
+      z-index: 20;
+      display: none;
+      align-items: flex-end;
+      justify-content: center;
+      padding: 16px;
+    }
+    .modal-bg.open { display: flex; }
+    .modal {
+      background: #14110c;
+      border: 1px solid rgba(242,193,78,.28);
+      max-width: 520px;
+      width: 100%;
+      max-height: min(78vh, 620px);
+      display: flex;
+      flex-direction: column;
+      padding: 22px 20px 18px;
+    }
+    .modal h3 {
+      font-family: Outfit, sans-serif;
+      font-size: 22px;
+      margin-bottom: 12px;
+    }
+    .modal-body {
+      overflow-y: auto;
+      color: #cbb892;
+      font-size: 13px;
+      line-height: 1.7;
+      padding-right: 6px;
+    }
+    .modal-body ol { padding-left: 18px; margin: 10px 0 14px; }
+    .modal-body li { margin-bottom: 8px; }
+    .modal-close {
+      margin-top: 16px;
+      align-self: flex-end;
+      background: var(--cheese);
+      color: var(--ink);
+      border: 0;
+      padding: 10px 14px;
+      font-family: inherit;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    @media (max-width: 680px) {
+      .grid { grid-template-columns: 1fr; }
+      .row { flex-direction: column; }
+      header { align-items: flex-start; }
+      .pill { max-width: 46%; }
+      .stack-wrap { height: 150px; }
+    }
+    @media (min-width: 681px) {
+      .wrap { padding: 48px 22px 80px; }
+      header { margin-bottom: 56px; }
+      button.send { width: auto; }
+      input { width: auto; flex: 1; }
+      .modal-bg { align-items: center; }
+    }
   </style>
 </head>
 <body>
@@ -293,14 +479,17 @@
       <div class="pill">Roblox Game Development</div>
     </header>
     <section class="hero">
-      <div class="stack" id="burger" title="click me">
-        <div class="sesame"></div>
-        <div class="tomato"></div>
-        <div class="cheese"></div>
-        <div class="patty"></div>
-        <div class="lettuce"></div>
-        <div class="bottom"></div>
+      <div class="stack-wrap" id="plate">
+        <div class="stack" id="burger" title="take a bite" role="button" tabindex="0" aria-label="Chezburger">
+          <div class="sesame"></div>
+          <div class="tomato"></div>
+          <div class="cheese"></div>
+          <div class="patty"></div>
+          <div class="lettuce"></div>
+          <div class="bottom"></div>
+        </div>
       </div>
+      <div class="tally" id="tally">burgers eaten <b id="count">0</b></div>
       <div class="kicker">Woeller23 Ventures Presents:</div>
       <h1>Chezburger<br /><span>Games</span></h1>
       <p class="sub">
@@ -324,7 +513,7 @@
       <article class="card">
         <span class="emoji">💬</span>
         <h2>Feedback is the recipe</h2>
-        <p>Playtests, suggestion threads, and “this is mid, fix it” comments are part of the pipeline - not an afterthought.</p>
+        <p>Playtests, suggestion threads, and “this is mid, fix it” comments are part of the pipeline — not an afterthought.</p>
       </article>
       <article class="card">
         <span class="emoji">🧱</span>
@@ -342,83 +531,195 @@
       <p>
         The plan is simple: take the game ideas people actually ask for, pressure-test them in public,
         and turn the best ones into games you can jump into with friends.
-        
-        Oh yeah, and if we pick your game idea, we'll send you 1000 Robux.
-        (Subject to terms and conditions)
+      </p>
+      <p class="reward">
+        If we pick your game idea, we’ll send you 1000 Robux.
+        <br />
+        <button type="button" class="terms-link" id="terms-open">Subject to terms and conditions</button>
       </p>
       <form id="idea-form" action="https://formsubmit.co/ajax/henry@fransoo.com" method="POST">
         <input type="hidden" name="_subject" value="Chezburger Games idea" />
         <input type="hidden" name="_template" value="table" />
         <input type="hidden" name="_captcha" value="false" />
         <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
-        <input type="text" name="name" placeholder="what should we call you" required />
-        <input type="email" name="email" placeholder="your email (so we can reply)" />
+        <div class="row">
+          <input type="text" name="name" placeholder="what should we call you" required />
+          <input type="email" name="email" placeholder="your email (so we can reply)" />
+        </div>
         <textarea name="idea" placeholder="the game you wish existed on Roblox…" required></textarea>
-        <button type="submit" id="send-btn">send the cheezburger</button>
+        <button type="submit" class="send" id="send-btn">send it</button>
       </form>
+      <div class="follow">
+        <h3>Follow the studio</h3>
+        <div class="socials">
+          <a class="ig" href="https://instagram.com/chezburgergames" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm10 2H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3zm-5 3.2A4.8 4.8 0 1 1 7.2 12 4.8 4.8 0 0 1 12 7.2zm0 2A2.8 2.8 0 1 0 14.8 12 2.8 2.8 0 0 0 12 9.2zM17.6 6.1a1.1 1.1 0 1 1-1.1 1.1 1.1 1.1 0 0 1 1.1-1.1z"/></svg>
+            Instagram
+          </a>
+          <a class="tt" href="https://tiktok.com/@chezburgergames" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.2 3h2.3c.2 1.7 1.2 3.3 2.7 4.2 1 .6 2.1.9 3.2.9v2.4c-1.5 0-3-.4-4.3-1.2v7.2A7.5 7.5 0 1 1 10 8.9v2.5a5 5 0 1 0 4.2 4.9V3z"/></svg>
+            TikTok
+          </a>
+        </div>
+      </div>
     </section>
     <footer>
-      Chezburger Games - Created by Henry Fransoo - Woeller23 Ventures<br />
-      “Can I haz cheezburger plz?” · launching 2026<br />
+      Chezburger Games · Henry Fransoo · Woeller23 Ventures<br />
+      Mmm, Chezburger · launching 2026<br />
       <a href="https://fransoo.com">fransoo.com</a>
     </footer>
   </div>
-  <div class="toast" id="toast">mmm, cheezburger. idea locked in.</div>
+
+  <div class="modal-bg" id="terms" role="dialog" aria-modal="true" aria-labelledby="terms-title">
+    <div class="modal">
+      <h3 id="terms-title">1000 Robux terms</h3>
+      <div class="modal-body">
+        <p>If we build your idea, you get 1000 Robux. That only happens if all of this is true:</p>
+        <ol>
+          <li>The game is finished and published publicly on Roblox. Payout is after release, not while it’s still in development.</li>
+          <li>The game has been live for at least one week from the launch date.</li>
+          <li>When we email you, you send back the Roblox username you want paid to.</li>
+        </ol>
+        <p>If your idea is selected, we email the address you put on the form. You reply with a username, and we send the Robux straight to that profile.</p>
+        <p>If more than one person sends the same idea, the payout goes to whoever submitted it first — through this form or a comment on one of our videos.</p>
+      </div>
+      <button type="button" class="modal-close" id="terms-close">got it</button>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
   <script>
     const field = document.getElementById("field");
-    for (let i = 0; i < 18; i++) {
+    const floatCount = window.matchMedia("(max-width: 680px)").matches ? 10 : 18;
+    for (let i = 0; i < floatCount; i++) {
       const el = document.createElement("div");
       el.className = "float-b";
       el.textContent = "🍔";
       el.style.left = Math.random() * 100 + "vw";
-      el.style.fontSize = 18 + Math.random() * 28 + "px";
-      el.style.animationDuration = 12 + Math.random() * 18 + "s";
+      el.style.fontSize = 16 + Math.random() * 24 + "px";
+      el.style.animationDuration = 14 + Math.random() * 18 + "s";
       el.style.animationDelay = (-Math.random() * 20) + "s";
       field.appendChild(el);
     }
+
     const burger = document.getElementById("burger");
+    const plate = document.getElementById("plate");
+    const tally = document.getElementById("tally");
+    const countEl = document.getElementById("count");
+
+    let bites = 0;
+    let finished = 0;
+    let busy = false;
+    let lineN = 0;
+
     const lines = [
-      "Can I haz cheezburger plz?",
-      "Mmm, Cheezburger!",
-      "U can has studio.",
+      "Mmm, Chezburger!",
       "Launching 2026.",
-      "Idea first. Grill later."
+      "Idea first. Grill later.",
+      "Easy — that's the mascot.",
+      "Save some for playtesting.",
+      "Classic gear. Wrong context.",
+      "Kitchen's open in 2026.",
+      "Don't eat the whole pipeline.",
+      "If this was a game, you'd have the badge.",
+      "One more and this one's gone.",
+      "Paid in flavor. Ideas pay in Robux.",
+      "Stop snacking. Start pitching."
     ];
-    let n = 0;
-    burger.addEventListener("click", () => {
-      burger.classList.remove("bite");
-      void burger.offsetWidth;
-      burger.classList.add("bite");
-      showToast(lines[n % lines.length]);
-      n++;
-    });
+
+    function crumbs() {
+      for (let i = 0; i < 5; i++) {
+        const c = document.createElement("div");
+        c.className = "crumb";
+        c.textContent = ["🍔","🧀","🥬","🍅"][i % 4];
+        c.style.left = 55 + Math.random() * 25 + "%";
+        c.style.top = "16%";
+        c.style.setProperty("--x", (16 + Math.random() * 80) + "px");
+        c.style.setProperty("--y", (-28 - Math.random() * 70) + "px");
+        plate.appendChild(c);
+        setTimeout(() => c.remove(), 700);
+      }
+    }
+
     function showToast(msg) {
       const t = document.getElementById("toast");
       t.textContent = msg;
       t.classList.add("show");
-      setTimeout(() => t.classList.remove("show"), 1800);
+      setTimeout(() => t.classList.remove("show"), 1700);
     }
+
+    function resetBurger() {
+      bites = 0;
+      burger.className = "stack drop-in";
+    }
+
+    function chomp() {
+      if (busy) return;
+      busy = true;
+      bites++;
+      burger.classList.remove("chomp");
+      void burger.offsetWidth;
+      burger.classList.add("chomp");
+      crumbs();
+      if (navigator.vibrate) navigator.vibrate(10);
+      showToast(lines[lineN % lines.length]);
+      lineN++;
+
+      if (bites === 1) {
+        burger.classList.add("b1");
+        setTimeout(() => { busy = false; }, 260);
+      } else if (bites === 2) {
+        burger.classList.remove("b1");
+        burger.classList.add("b2");
+        setTimeout(() => { busy = false; }, 260);
+      } else {
+        burger.classList.remove("b1","b2");
+        burger.classList.add("eaten");
+        finished++;
+        countEl.textContent = finished;
+        if (finished >= 3) tally.classList.add("on");
+        setTimeout(() => {
+          resetBurger();
+          busy = false;
+        }, 340);
+      }
+    }
+
+    burger.addEventListener("click", chomp);
+    burger.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); chomp(); }
+    });
 
     const form = document.getElementById("idea-form");
     const btn = document.getElementById("send-btn");
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
       btn.disabled = true;
-      const payload = new FormData(form);
       try {
         const res = await fetch(form.action, {
           method: "POST",
-          body: payload,
+          body: new FormData(form),
           headers: { Accept: "application/json" }
         });
         if (!res.ok) throw new Error("send failed");
         form.reset();
-        showToast("mmm, cheezburger. sent to the kitchen.");
+        showToast("sent. we'll take a look.");
       } catch (err) {
-        showToast("grill jammed. try again in a sec.");
+        showToast("didn't go through. try again.");
       } finally {
         btn.disabled = false;
       }
+    });
+
+    const terms = document.getElementById("terms");
+    document.getElementById("terms-open").addEventListener("click", () => {
+      terms.classList.add("open");
+    });
+    document.getElementById("terms-close").addEventListener("click", () => {
+      terms.classList.remove("open");
+    });
+    terms.addEventListener("click", (e) => {
+      if (e.target === terms) terms.classList.remove("open");
     });
   </script>
 </body>
