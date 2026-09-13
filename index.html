@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chezburger Games — Launching 2026</title>
+  <meta name="description" content="Chezburger Games. A Roblox studio that builds games from your ideas. Coming 2026." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Outfit:wght@500;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0c0b09;
+      --paper: #f4e7c3;
+      --bun: #d4a056;
+      --bun-dark: #b07a2e;
+      --patty: #3a2214;
+      --cheese: #f2c14e;
+      --tomato: #c23b2e;
+      --lettuce: #6aaa3a;
+      --ink: #1a140c;
+      --muted: #9a8b6e;
+      --glow: #ffcc55;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      min-height: 100%;
+      background: var(--bg);
+      color: var(--paper);
+      font-family: "IBM Plex Mono", ui-monospace, monospace;
+    }
+
+    body {
+      overflow-x: hidden;
+      background-image:
+        radial-gradient(ellipse at 20% -10%, rgba(212,160,86,.18), transparent 50%),
+        radial-gradient(ellipse at 80% 110%, rgba(194,59,46,.12), transparent 45%);
+    }
+
+    /* floating burger field */
+    .field {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .float-b {
+      position: absolute;
+      font-size: 28px;
+      opacity: .14;
+      animation: drift linear infinite;
+      filter: drop-shadow(0 0 8px rgba(242,193,78,.25));
+      user-select: none;
+    }
+    @keyframes drift {
+      from { transform: translateY(110vh) rotate(0deg); }
+      to { transform: translateY(-20vh) rotate(360deg); }
+    }
+
+    .wrap {
+      position: relative;
+      z-index: 1;
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 48px 22px 80px;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 56px;
+    }
+    .mark {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: Outfit, sans-serif;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      font-size: 18px;
+    }
+    .pill {
+      font-size: 11px;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      border: 1px solid rgba(244,231,195,.25);
+      padding: 6px 10px;
+      color: var(--muted);
+    }
+
+    /* hero burger */
+    .hero {
+      text-align: center;
+    }
+
+    .stack {
+      width: 220px;
+      margin: 0 auto 28px;
+      cursor: pointer;
+      transform-origin: 50% 80%;
+      transition: transform .25s ease;
+    }
+    .stack:hover { transform: rotate(-4deg) scale(1.04); }
+    .stack.bite { animation: chomp .45s ease; }
+    @keyframes chomp {
+      0% { transform: scale(1); }
+      40% { transform: scale(.86) rotate(6deg); }
+      100% { transform: scale(1); }
+    }
+
+    .layer {
+      margin: 0 auto;
+      border-radius: 40px;
+    }
+    .sesame {
+      width: 180px; height: 58px;
+      background: radial-gradient(circle at 30% 30%, #f0c57a, var(--bun) 45%, var(--bun-dark));
+      border-radius: 90px 90px 28px 28px;
+      position: relative;
+      box-shadow: 0 10px 0 #8c5e1e, 0 18px 30px rgba(0,0,0,.45);
+    }
+    .sesame::before, .sesame::after {
+      content: "";
+      position: absolute;
+      width: 8px; height: 5px;
+      background: #fff6d8;
+      border-radius: 50%;
+      top: 16px;
+    }
+    .sesame::before { left: 38px; box-shadow: 36px 8px #fff6d8, 72px -2px #fff6d8, 20px 18px #fff6d8, 90px 14px #fff6d8; }
+    .sesame::after { left: 110px; top: 22px; box-shadow: -20px 10px #fff6d8, 18px -8px #fff6d8; }
+
+    .tomato { width: 168px; height: 16px; background: var(--tomato); margin-top: -6px; box-shadow: 0 6px 0 #8e241c; }
+    .cheese {
+      width: 176px; height: 14px;
+      background: var(--cheese);
+      margin-top: -4px;
+      clip-path: polygon(0 0, 100% 0, 96% 100%, 8% 100%);
+      box-shadow: 0 8px 0 #c99620;
+    }
+    .patty {
+      width: 170px; height: 28px;
+      background: linear-gradient(#5a3320, var(--patty));
+      margin-top: -4px;
+      border-radius: 18px;
+      box-shadow: 0 8px 0 #24140c;
+    }
+    .lettuce {
+      width: 186px; height: 14px;
+      background: var(--lettuce);
+      margin-top: -6px;
+      border-radius: 0 0 40% 40%;
+      clip-path: polygon(0 20%, 12% 0, 24% 30%, 38% 0, 52% 28%, 66% 0, 80% 26%, 100% 0, 100% 100%, 0 100%);
+    }
+    .bottom {
+      width: 178px; height: 28px;
+      background: linear-gradient(#c48b3a, #9a6420);
+      border-radius: 16px 16px 40px 40px;
+      margin-top: -4px;
+      box-shadow: 0 16px 28px rgba(0,0,0,.5);
+    }
+    .bite-mark {
+      position: absolute;
+      width: 42px; height: 42px;
+      background: var(--bg);
+      border-radius: 50%;
+      right: 18px; top: 8px;
+      box-shadow: inset -6px 0 0 rgba(0,0,0,.15);
+      opacity: 0;
+    }
+    .stack.eaten .bite-mark { opacity: 1; }
+
+    .kicker {
+      font-size: 12px;
+      letter-spacing: .28em;
+      text-transform: uppercase;
+      color: var(--cheese);
+      margin-bottom: 14px;
+    }
+    h1 {
+      font-family: Outfit, sans-serif;
+      font-size: clamp(42px, 9vw, 86px);
+      line-height: .9;
+      letter-spacing: -0.045em;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+    h1 span { color: var(--cheese); }
+    .sub {
+      font-size: 16px;
+      color: var(--muted);
+      max-width: 520px;
+      margin: 0 auto 28px;
+      line-height: 1.55;
+    }
+
+    .year {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      border: 1px dashed rgba(242,193,78,.45);
+      padding: 10px 16px;
+      color: var(--paper);
+      margin-bottom: 48px;
+    }
+    .year b { color: var(--cheese); }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 40px;
+    }
+    @media (max-width: 680px) { .grid { grid-template-columns: 1fr; } }
+
+    .card {
+      background: rgba(244,231,195,.04);
+      border: 1px solid rgba(244,231,195,.1);
+      padding: 22px 20px;
+      text-align: left;
+    }
+    .card h2 {
+      font-family: Outfit, sans-serif;
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+    .card p { color: var(--muted); font-size: 13px; line-height: 1.55; }
+    .emoji { font-size: 22px; display: block; margin-bottom: 10px; }
+
+    .pitch {
+      border: 1px solid rgba(242,193,78,.25);
+      padding: 28px 22px;
+      margin-bottom: 36px;
+      background: linear-gradient(180deg, rgba(242,193,78,.06), transparent);
+    }
+    .pitch h2 {
+      font-family: Outfit, sans-serif;
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+    .pitch p { color: #cbb892; font-size: 14px; line-height: 1.65; max-width: 640px; }
+
+    form {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+    input, textarea, button {
+      font-family: inherit;
+      font-size: 14px;
+    }
+    input, textarea {
+      background: #16130e;
+      border: 1px solid rgba(244,231,195,.18);
+      color: var(--paper);
+      padding: 12px 14px;
+      outline: none;
+      min-width: 0;
+    }
+    input { flex: 1; min-width: 220px; }
+    textarea { width: 100%; min-height: 90px; resize: vertical; }
+    button {
+      background: var(--cheese);
+      color: var(--ink);
+      border: 0;
+      padding: 12px 18px;
+      font-weight: 700;
+      cursor: pointer;
+      letter-spacing: .04em;
+    }
+    button:hover { filter: brightness(1.08); }
+    .note { margin-top: 10px; font-size: 11px; color: var(--muted); }
+
+    .wall {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      margin: 28px 0 40px;
+    }
+    .chip {
+      font-size: 22px;
+      line-height: 1;
+      opacity: .85;
+      animation: wobble 3s ease-in-out infinite;
+    }
+    .chip:nth-child(odd) { animation-delay: .4s; }
+    @keyframes wobble {
+      0%,100% { transform: translateY(0) rotate(-6deg); }
+      50% { transform: translateY(-6px) rotate(8deg); }
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.7;
+    }
+    footer a { color: var(--cheese); text-decoration: none; }
+
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: var(--cheese);
+      color: var(--ink);
+      padding: 10px 16px;
+      font-weight: 700;
+      opacity: 0;
+      pointer-events: none;
+      transition: .25s ease;
+      z-index: 9;
+    }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+  </style>
+</head>
+<body>
+  <div class="field" id="field"></div>
+
+  <div class="wrap">
+    <header>
+      <div class="mark">🍔 Chezburger Games</div>
+      <div class="pill">Roblox studio · 2026</div>
+    </header>
+
+    <section class="hero">
+      <div class="stack" id="burger" title="click me">
+        <div class="sesame"></div>
+        <div class="tomato"></div>
+        <div class="cheese"></div>
+        <div class="patty"></div>
+        <div class="lettuce"></div>
+        <div class="bottom"></div>
+      </div>
+
+      <div class="kicker">u can has games</div>
+      <h1>Chezburger<br /><span>Games</span></h1>
+      <p class="sub">
+        A Roblox game studio that cooks what the crowd actually wants.
+        Your ideas. Your feedback. Our kitchen.
+      </p>
+      <div class="year">Launching <b>2026</b> · coming soon</div>
+    </section>
+
+    <div class="wall" aria-hidden="true">
+      <span class="chip">🍔</span><span class="chip">🍔</span><span class="chip">🍔</span>
+      <span class="chip">🍔</span><span class="chip">🍔</span><span class="chip">🍔</span>
+      <span class="chip">🍔</span><span class="chip">🍔</span><span class="chip">🍔</span>
+      <span class="chip">🍔</span><span class="chip">🍔</span><span class="chip">🍔</span>
+    </div>
+
+    <div class="grid">
+      <article class="card">
+        <span class="emoji">🧠</span>
+        <h2>Audience-built</h2>
+        <p>We don’t lock a genre in a vault. You pitch the game. The community votes. We ship the ones that slap.</p>
+      </article>
+      <article class="card">
+        <span class="emoji">💬</span>
+        <h2>Feedback is the recipe</h2>
+        <p>Playtests, suggestion threads, and “this is mid, fix it” comments are part of the pipeline — not an afterthought.</p>
+      </article>
+      <article class="card">
+        <span class="emoji">🧱</span>
+        <h2>Made for Roblox</h2>
+        <p>Classic energy. Modern systems. Short sessions, replay hooks, and that “one more round” itch.</p>
+      </article>
+      <article class="card">
+        <span class="emoji">📢</span>
+        <h2>Loud on purpose</h2>
+        <p>If it isn’t fun in the first 30 seconds, it doesn’t leave the kitchen. Mmm, Cheezburger.</p>
+      </article>
+    </div>
+
+    <section class="pitch">
+      <h2>Drop an idea. We’ll chew on it.</h2>
+      <p>
+        Chezburger Games is a new Roblox studio launching in 2026.
+        The plan is simple: take the ideas people actually ask for, pressure-test them in public,
+        and turn the best ones into games you can jump into with friends.
+      </p>
+      <form id="idea-form" onsubmit="return handleIdea(event)">
+        <input type="text" name="name" placeholder="what should we call you" required />
+        <input type="email" name="email" placeholder="email (optional-ish)" />
+        <textarea name="idea" placeholder="the game you wish existed on Roblox…" required></textarea>
+        <button type="submit">send the cheezburger</button>
+      </form>
+      <p class="note">This page is a tease. Submissions stay on this device for now — hook it to a form backend when you go live.</p>
+    </section>
+
+    <footer>
+      Chezburger Games · Cochrane / Calgary energy · Roblox development studio<br />
+      “Can I haz cheezburger plz?” · launching 2026<br />
+      <a href="https://fransoo.com">fransoo.com</a>
+    </footer>
+  </div>
+
+  <div class="toast" id="toast">mmm, cheezburger. idea locked in.</div>
+
+  <script>
+    const field = document.getElementById("field");
+    for (let i = 0; i < 18; i++) {
+      const el = document.createElement("div");
+      el.className = "float-b";
+      el.textContent = "🍔";
+      el.style.left = Math.random() * 100 + "vw";
+      el.style.fontSize = 18 + Math.random() * 28 + "px";
+      el.style.animationDuration = 12 + Math.random() * 18 + "s";
+      el.style.animationDelay = (-Math.random() * 20) + "s";
+      field.appendChild(el);
+    }
+
+    const burger = document.getElementById("burger");
+    const lines = [
+      "Can I haz cheezburger plz?",
+      "Mmm, Cheezburger!",
+      "U can has studio.",
+      "Launching 2026.",
+      "Idea first. Grill later."
+    ];
+    let n = 0;
+    burger.addEventListener("click", () => {
+      burger.classList.remove("bite");
+      void burger.offsetWidth;
+      burger.classList.add("bite");
+      showToast(lines[n % lines.length]);
+      n++;
+    });
+
+    function showToast(msg) {
+      const t = document.getElementById("toast");
+      t.textContent = msg;
+      t.classList.add("show");
+      setTimeout(() => t.classList.remove("show"), 1800);
+    }
+
+    function handleIdea(e) {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(e.target));
+      const bag = JSON.parse(localStorage.getItem("chezburger-ideas") || "[]");
+      bag.push({ ...data, at: new Date().toISOString() });
+      localStorage.setItem("chezburger-ideas", JSON.stringify(bag));
+      e.target.reset();
+      showToast("mmm, cheezburger. idea locked in.");
+      return false;
+    }
+  </script>
+</body>
+</html>
