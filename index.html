@@ -93,16 +93,24 @@
       height: 170px;
       margin: 0 auto 18px;
     }
+    .hit {
+      position: absolute;
+      inset: 0;
+      z-index: 4;
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
     .stack {
       width: 100%;
-      cursor: pointer;
+      pointer-events: none;
       transform-origin: 50% 80%;
       transition: transform .22s ease, clip-path .2s ease;
-      -webkit-tap-highlight-color: transparent;
       user-select: none;
       position: relative;
     }
-    .stack:hover { transform: rotate(-3deg) scale(1.04); }
+    .stack-wrap:hover .stack { transform: rotate(-3deg) scale(1.04); }
     .stack.chomp { animation: chomp .42s cubic-bezier(.2,1.4,.3,1); }
     @keyframes chomp {
       0% { transform: scale(1) rotate(0); }
@@ -265,7 +273,7 @@
     .pitch {
       border: 1px solid rgba(242,193,78,.25);
       padding: 24px 18px;
-      margin-bottom: 36px;
+      margin-bottom: 14px;
       background: linear-gradient(180deg, rgba(242,193,78,.06), transparent);
     }
     .pitch h2 {
@@ -328,9 +336,10 @@
     button.send:hover { filter: brightness(1.08); }
 
     .follow {
-      margin-top: 28px;
-      padding-top: 22px;
-      border-top: 1px solid rgba(244,231,195,.1);
+      border: 1px solid rgba(244,231,195,.1);
+      background: rgba(244,231,195,.04);
+      padding: 22px 18px;
+      margin-bottom: 36px;
     }
     .follow h3 {
       font-family: Outfit, sans-serif;
@@ -347,31 +356,46 @@
     .socials a {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
       font-family: Outfit, sans-serif;
       font-weight: 800;
       font-size: 14px;
       letter-spacing: -0.03em;
-      color: var(--ink);
       text-decoration: none;
-      background: var(--paper);
       padding: 10px 14px;
       min-height: 44px;
     }
-    .socials a svg { width: 16px; height: 16px; fill: currentColor; flex-shrink: 0; }
-    .socials a.ig { background: #f4e7c3; }
-    .socials a.tt { background: var(--cheese); }
-    .socials a:hover { filter: brightness(1.06); }
+    .socials a:hover { filter: brightness(1.07); }
+    .ig-logo {
+      width: 22px; height: 22px;
+      border-radius: 7px;
+      background: radial-gradient(circle at 30% 110%, #fccc63, #fccc63 20%, #f77737 40%, #e1306c 60%, #c13584 75%, #833ab4);
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+    .ig-logo svg { width: 13px; height: 13px; fill: #fff; }
+    .socials a.ig { background: #1a1216; color: #fff; }
+    .tt-logo {
+      width: 22px; height: 22px;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+    .tt-logo svg { width: 16px; height: 16px; }
+    .socials a.tt { background: #111; color: #fff; }
 
     .wall {
       display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
+      flex-wrap: nowrap;
+      gap: 6px;
       justify-content: center;
-      margin: 8px 0 28px;
+      margin: 8px auto 28px;
+      max-width: 100%;
+      overflow: hidden;
     }
     .chip {
-      font-size: 20px;
+      font-size: clamp(15px, 4.6vw, 20px);
       line-height: 1;
       opacity: .8;
       animation: wobble 3s ease-in-out infinite;
@@ -458,9 +482,15 @@
     @media (max-width: 680px) {
       .grid { grid-template-columns: 1fr; }
       .row { flex-direction: column; }
-      header { align-items: flex-start; }
+      header { align-items: center; gap: 8px; }
+      .mark { font-size: 14px; }
       .pill { max-width: 46%; }
+      
       .stack-wrap { height: 150px; }
+      .chip:nth-child(n+7) { display: none; }
+      .socials a { width: 100%; justify-content: center; }
+      .socials a { width: 100%; justify-content: center; }
+      .year { font-size: 12px; }
     }
     @media (min-width: 681px) {
       .wrap { padding: 48px 22px 80px; }
@@ -480,7 +510,7 @@
     </header>
     <section class="hero">
       <div class="stack-wrap" id="plate">
-        <div class="stack" id="burger" title="take a bite" role="button" tabindex="0" aria-label="Chezburger">
+        <div class="stack" id="burger">
           <div class="sesame"></div>
           <div class="tomato"></div>
           <div class="cheese"></div>
@@ -488,6 +518,7 @@
           <div class="lettuce"></div>
           <div class="bottom"></div>
         </div>
+        <button class="hit" id="hit" type="button" aria-label="eat the chezburger"></button>
       </div>
       <div class="tally" id="tally">burgers eaten <b id="count">0</b></div>
       <div class="kicker">Woeller23 Ventures Presents:</div>
@@ -502,28 +533,28 @@
       <span class="chip">🍔</span><span class="chip">🍔</span><span class="chip">🍔</span>
       <span class="chip">🍔</span><span class="chip">🍔</span><span class="chip">🍔</span>
       <span class="chip">🍔</span><span class="chip">🍔</span><span class="chip">🍔</span>
-      <span class="chip">🍔</span><span class="chip">🍔</span><span class="chip">🍔</span>
+      <span class="chip">🍔</span>
     </div>
     <div class="grid">
       <article class="card">
         <span class="emoji">🧠</span>
         <h2>Audience-built</h2>
-        <p>We don’t lock a genre in a vault. You pitch the game. The community votes. We ship the ones that slap.</p>
+        <p>We don’t lock special ideas in a vault. You pitch the game, the add-ons, the everything. The community votes. We build the ones that slap.</p>
       </article>
       <article class="card">
         <span class="emoji">💬</span>
         <h2>Feedback is the recipe</h2>
-        <p>Playtests, suggestion threads, and “this is mid, fix it” comments are part of the pipeline — not an afterthought.</p>
+        <p>Playtests, suggestions, and “this is mid, fix it” comments are part of our creative process — not an afterthought.</p>
       </article>
       <article class="card">
         <span class="emoji">🧱</span>
         <h2>Made for Roblox</h2>
-        <p>Classic energy. Modern systems. Short sessions, replay hooks, and that “one more round” itch.</p>
+        <p>If it doesn’t work in a Roblox server with your friends, we didn't make it.</p>
       </article>
       <article class="card">
         <span class="emoji">📢</span>
         <h2>Loud on purpose</h2>
-        <p>If it isn’t fun in the first 30 seconds, it doesn’t leave the kitchen. Mmm, Chezburger.</p>
+        <p>If it isn’t fun in the first 30 seconds, it doesn’t leave our kitchen. Mmmmm, Chezburger.</p>
       </article>
     </div>
     <section class="pitch">
@@ -549,18 +580,26 @@
         <textarea name="idea" placeholder="the game you wish existed on Roblox…" required></textarea>
         <button type="submit" class="send" id="send-btn">send it</button>
       </form>
-      <div class="follow">
-        <h3>Follow the studio</h3>
-        <div class="socials">
-          <a class="ig" href="https://instagram.com/chezburgergames" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm10 2H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3zm-5 3.2A4.8 4.8 0 1 1 7.2 12 4.8 4.8 0 0 1 12 7.2zm0 2A2.8 2.8 0 1 0 14.8 12 2.8 2.8 0 0 0 12 9.2zM17.6 6.1a1.1 1.1 0 1 1-1.1 1.1 1.1 1.1 0 0 1 1.1-1.1z"/></svg>
-            Instagram
-          </a>
-          <a class="tt" href="https://tiktok.com/@chezburgergames" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.2 3h2.3c.2 1.7 1.2 3.3 2.7 4.2 1 .6 2.1.9 3.2.9v2.4c-1.5 0-3-.4-4.3-1.2v7.2A7.5 7.5 0 1 1 10 8.9v2.5a5 5 0 1 0 4.2 4.9V3z"/></svg>
-            TikTok
-          </a>
-        </div>
+    </section>
+    <section class="follow">
+      <h3>Follow the studio</h3>
+      <div class="socials">
+        <a class="ig" href="https://instagram.com/chezburgergames" target="_blank" rel="noopener">
+          <span class="ig-logo" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm10 2H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3zm-5 3.2A4.8 4.8 0 1 1 7.2 12 4.8 4.8 0 0 1 12 7.2zm0 2A2.8 2.8 0 1 0 14.8 12 2.8 2.8 0 0 0 12 9.2zM17.6 6.1a1.1 1.1 0 1 1-1.1 1.1 1.1 1.1 0 0 1 1.1-1.1z"/></svg>
+          </span>
+          Instagram
+        </a>
+        <a class="tt" href="https://tiktok.com/@chezburgergames" target="_blank" rel="noopener">
+          <span class="tt-logo" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path fill="#25F4EE" d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z" transform="translate(-1.05 .7)"/>
+              <path fill="#FE2C55" d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z" transform="translate(1.1 -.55)"/>
+              <path fill="#fff" d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/>
+            </svg>
+          </span>
+          TikTok
+        </a>
       </div>
     </section>
     <footer>
@@ -574,7 +613,7 @@
     <div class="modal">
       <h3 id="terms-title">1000 Robux terms</h3>
       <div class="modal-body">
-        <p>If we build your idea, you get 1000 Robux. Which will happen if all of this is true:</p>
+        <p>If we build your idea, you get 1000 Robux. That only happens if all of this is true:</p>
         <ol>
           <li>The game is finished and published publicly on Roblox. Payout is after release, not while it’s still in development.</li>
           <li>The game has been live for at least one week from the launch date.</li>
@@ -603,9 +642,16 @@
     }
 
     const burger = document.getElementById("burger");
+    const hit = document.getElementById("hit");
     const plate = document.getElementById("plate");
     const tally = document.getElementById("tally");
     const countEl = document.getElementById("count");
+    const nom = new Audio("https://raw.githubusercontent.com/codelyoon/chezburger/d80834594acfa7a3e0bc9ca0f14a4673825c76bb/mmm-cheezburger.mp3");
+    nom.preload = "auto";
+    function playNom() {
+      nom.currentTime = 0;
+      nom.play().catch(() => {});
+    }
 
     let bites = 0;
     let finished = 0;
@@ -678,6 +724,7 @@
         finished++;
         countEl.textContent = finished;
         if (finished >= 3) tally.classList.add("on");
+        playNom();
         setTimeout(() => {
           resetBurger();
           busy = false;
@@ -685,8 +732,8 @@
       }
     }
 
-    burger.addEventListener("click", chomp);
-    burger.addEventListener("keydown", (e) => {
+    hit.addEventListener("click", chomp);
+    hit.addEventListener("keydown", (e) => {
       if (e.key === "Enter" || e.key === " ") { e.preventDefault(); chomp(); }
     });
 
