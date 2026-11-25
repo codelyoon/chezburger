@@ -2,772 +2,2059 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>Chezburger Games — Launching 2026</title>
-  <meta name="description" content="Chezburger Games. A Roblox studio that builds games from your ideas. Coming 2026." />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GNED 1202 (Derynck) — Midterm Exam 2 Zero-to-Mastery Hub</title>
+  <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Outfit:wght@500;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
   <style>
-    :root {
-      --bg: #0c0b09;
-      --paper: #f4e7c3;
-      --bun: #d4a056;
-      --bun-dark: #b07a2e;
-      --patty: #3a2214;
-      --cheese: #f2c14e;
-      --tomato: #c23b2e;
-      --lettuce: #6aaa3a;
-      --ink: #1a140c;
-      --muted: #9a8b6e;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body {
-      min-height: 100%;
-      background: var(--bg);
-      color: var(--paper);
-      font-family: "IBM Plex Mono", ui-monospace, monospace;
-    }
     body {
-      overflow-x: hidden;
-      background-image:
-        radial-gradient(ellipse at 20% -10%, rgba(212,160,86,.18), transparent 50%),
-        radial-gradient(ellipse at 80% 110%, rgba(194,59,46,.12), transparent 45%);
+      font-family: 'Inter', sans-serif;
+      background-color: #f8fafc;
+      color: #0f172a;
     }
-    .field {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 0;
-      overflow: hidden;
+    .font-serif-academic {
+      font-family: 'Newsreader', Georgia, serif;
     }
-    .float-b {
-      position: absolute;
-      font-size: 28px;
-      opacity: .12;
-      animation: drift linear infinite;
-      user-select: none;
+    .font-mono-card {
+      font-family: 'JetBrains Mono', monospace;
     }
-    @keyframes drift {
-      from { transform: translateY(110vh) rotate(0deg); }
-      to { transform: translateY(-20vh) rotate(360deg); }
+    .perspective-1000 {
+      perspective: 1200px;
     }
-    .wrap {
-      position: relative;
-      z-index: 1;
-      max-width: 920px;
-      margin: 0 auto;
-      padding: 36px 20px 72px;
+    .preserve-3d {
+      transform-style: preserve-3d;
+      transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
     }
-    header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 40px;
+    .backface-hidden {
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
     }
-    .mark {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-family: Outfit, sans-serif;
-      font-weight: 800;
-      letter-spacing: -0.03em;
-      font-size: 16px;
-      white-space: nowrap;
+    .rotate-y-180 {
+      transform: rotateY(180deg);
     }
-    .pill {
-      font-size: 10px;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-      border: 1px solid rgba(244,231,195,.25);
-      padding: 6px 9px;
-      color: var(--muted);
-      text-align: right;
-      line-height: 1.3;
+    .flipped {
+      transform: rotateY(180deg);
     }
-    .hero { text-align: center; }
-    .stack-wrap {
-      position: relative;
-      width: min(220px, 56vw);
-      height: 170px;
-      margin: 0 auto 18px;
+    .index-card-paper {
+      background-color: #fffef9;
+      background-image: linear-gradient(to bottom, transparent 27px, #dbeafe 28px);
+      background-size: 100% 28px;
     }
-    .hit {
-      position: absolute;
-      inset: 0;
-      z-index: 4;
-      border: 0;
-      background: transparent;
-      cursor: pointer;
-      -webkit-tap-highlight-color: transparent;
+    details > summary {
+      list-style: none;
     }
-    .stack {
-      width: 100%;
-      pointer-events: none;
-      transform-origin: 50% 80%;
-      transition: transform .22s ease, clip-path .2s ease;
-      user-select: none;
-      position: relative;
-    }
-    .stack-wrap:hover .stack { transform: rotate(-3deg) scale(1.04); }
-    .stack.chomp { animation: chomp .42s cubic-bezier(.2,1.4,.3,1); }
-    @keyframes chomp {
-      0% { transform: scale(1) rotate(0); }
-      25% { transform: scale(.84) rotate(-7deg); }
-      55% { transform: scale(1.06) rotate(5deg); }
-      100% { transform: scale(1) rotate(0); }
-    }
-    .stack.drop-in { animation: dropin .45s cubic-bezier(.2,1.1,.3,1); }
-    @keyframes dropin {
-      0% { transform: translateY(-70px) scale(.7) rotate(-12deg); opacity: 0; }
-      100% { transform: none; opacity: 1; }
-    }
-    .stack.eaten { animation: swallow .32s ease forwards; }
-    @keyframes swallow {
-      0% { transform: scale(1); opacity: 1; }
-      100% { transform: scale(.12) rotate(16deg); opacity: 0; }
-    }
-
-    /* one growing bite from the top-right — no leftover islands */
-    .stack.b1 {
-      clip-path: polygon(
-        0 0, 52% 0,
-        56% 9%, 44% 6%, 50% 20%,
-        36% 16%, 48% 34%,
-        100% 28%, 100% 100%,
-        0 100%
-      );
-    }
-    .stack.b2 {
-      clip-path: polygon(
-        0 0, 42% 0,
-        46% 11%, 34% 8%, 40% 24%,
-        22% 20%, 30% 48%,
-        12% 54%, 20% 100%,
-        0 100%
-      );
-    }
-
-    .sesame, .tomato, .cheese, .patty, .lettuce, .bottom { margin-left: auto; margin-right: auto; }
-    .sesame {
-      width: 82%; height: 58px;
-      background: radial-gradient(circle at 30% 30%, #f0c57a, var(--bun) 45%, var(--bun-dark));
-      border-radius: 90px 90px 28px 28px;
-      position: relative;
-      box-shadow: 0 10px 0 #8c5e1e, 0 18px 30px rgba(0,0,0,.45);
-    }
-    .sesame::before, .sesame::after {
-      content: "";
-      position: absolute;
-      width: 8px; height: 5px;
-      background: #fff6d8;
-      border-radius: 50%;
-      top: 16px;
-    }
-    .sesame::before { left: 18%; box-shadow: 36px 8px #fff6d8, 72px -2px #fff6d8, 20px 18px #fff6d8, 90px 14px #fff6d8; }
-    .sesame::after { left: 58%; top: 22px; box-shadow: -20px 10px #fff6d8, 18px -8px #fff6d8; }
-    .tomato { width: 76%; height: 16px; background: var(--tomato); margin-top: -6px; box-shadow: 0 6px 0 #8e241c; }
-    .cheese {
-      width: 80%; height: 14px;
-      background: var(--cheese);
-      margin-top: -4px;
-      clip-path: polygon(0 0, 100% 0, 96% 100%, 8% 100%);
-      box-shadow: 0 8px 0 #c99620;
-    }
-    .patty {
-      width: 77%; height: 28px;
-      background: linear-gradient(#5a3320, var(--patty));
-      margin-top: -4px;
-      border-radius: 18px;
-      box-shadow: 0 8px 0 #24140c;
-    }
-    .lettuce {
-      width: 85%; height: 14px;
-      background: var(--lettuce);
-      margin-top: -6px;
-      clip-path: polygon(0 20%, 12% 0, 24% 30%, 38% 0, 52% 28%, 66% 0, 80% 26%, 100% 0, 100% 100%, 0 100%);
-    }
-    .bottom {
-      width: 81%; height: 28px;
-      background: linear-gradient(#c48b3a, #9a6420);
-      border-radius: 16px 16px 40px 40px;
-      margin-top: -4px;
-      box-shadow: 0 16px 28px rgba(0,0,0,.5);
-    }
-    .crumb {
-      position: absolute;
-      pointer-events: none;
-      font-size: 15px;
-      animation: crumb .7s ease-out forwards;
-    }
-    @keyframes crumb {
-      0% { opacity: 1; transform: translate(0,0) scale(1) rotate(0); }
-      100% { opacity: 0; transform: translate(var(--x), var(--y)) scale(.35) rotate(200deg); }
-    }
-
-    .tally {
+    details > summary::-webkit-details-marker {
       display: none;
-      margin: 0 auto 14px;
-      font-size: 11px;
-      letter-spacing: .16em;
-      text-transform: uppercase;
-      color: var(--muted);
     }
-    .tally.on { display: block; }
-    .tally b { color: var(--cheese); letter-spacing: 0; font-size: 13px; }
-
-    .kicker {
-      font-size: 11px;
-      letter-spacing: .18em;
-      text-transform: uppercase;
-      color: var(--cheese);
-      margin-bottom: 12px;
-    }
-    h1 {
-      font-family: Outfit, sans-serif;
-      font-size: clamp(40px, 12vw, 86px);
-      line-height: .9;
-      letter-spacing: -0.045em;
-      font-weight: 800;
-      margin-bottom: 12px;
-    }
-    h1 span { color: var(--cheese); }
-    .sub {
-      font-size: 15px;
-      color: var(--muted);
-      max-width: 520px;
-      margin: 0 auto 22px;
-      line-height: 1.6;
-    }
-    .year {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      border: 1px dashed rgba(242,193,78,.45);
-      padding: 10px 14px;
-      color: var(--paper);
-      margin-bottom: 28px;
-      font-size: 13px;
-    }
-    .year b { color: var(--cheese); }
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-bottom: 32px;
-    }
-    .card {
-      background: rgba(244,231,195,.04);
-      border: 1px solid rgba(244,231,195,.1);
-      padding: 20px 18px;
-      text-align: left;
-    }
-    .card h2 {
-      font-family: Outfit, sans-serif;
-      font-size: 17px;
-      margin-bottom: 8px;
-    }
-    .card p { color: var(--muted); font-size: 13px; line-height: 1.55; }
-    .emoji { font-size: 22px; display: block; margin-bottom: 10px; }
-    .pitch {
-      border: 1px solid rgba(242,193,78,.25);
-      padding: 24px 18px;
-      margin-bottom: 14px;
-      background: linear-gradient(180deg, rgba(242,193,78,.06), transparent);
-    }
-    .pitch h2 {
-      font-family: Outfit, sans-serif;
-      font-size: clamp(20px, 5vw, 22px);
-      margin-bottom: 10px;
-    }
-    .pitch p { color: #cbb892; font-size: 14px; line-height: 1.7; max-width: 640px; }
-    .reward {
-      margin-top: 12px;
-      color: var(--cheese);
-      font-size: 13px;
-      line-height: 1.55;
-    }
-    .terms-link {
-      display: inline;
-      color: var(--muted);
-      font-size: 11px;
-      text-decoration: underline;
-      text-underline-offset: 3px;
-      cursor: pointer;
-      background: none;
-      border: 0;
-      padding: 0;
-      font-family: inherit;
-    }
-    .terms-link:hover { color: var(--paper); }
-    form {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 18px;
-    }
-    input, textarea, button { font-family: inherit; font-size: 16px; }
-    input, textarea {
-      background: #16130e;
-      border: 1px solid rgba(244,231,195,.18);
-      color: var(--paper);
-      padding: 12px 14px;
-      outline: none;
-      min-width: 0;
-      width: 100%;
-    }
-    input:focus, textarea:focus { border-color: var(--cheese); }
-    .row { display: flex; gap: 10px; width: 100%; }
-    .row input { flex: 1; width: auto; }
-    textarea { min-height: 110px; resize: vertical; }
-    button.send {
-      background: var(--cheese);
-      color: var(--ink);
-      border: 0;
-      padding: 14px 18px;
-      font-weight: 700;
-      cursor: pointer;
-      letter-spacing: .04em;
-      width: 100%;
-      min-height: 48px;
-    }
-    button.send:disabled { opacity: .6; cursor: wait; }
-    button.send:hover { filter: brightness(1.08); }
-
-    .follow {
-      border: 1px solid rgba(244,231,195,.1);
-      background: rgba(244,231,195,.04);
-      padding: 22px 18px;
-      margin-bottom: 36px;
-    }
-    .follow h3 {
-      font-family: Outfit, sans-serif;
-      font-weight: 800;
-      font-size: 16px;
-      letter-spacing: -0.03em;
-      margin-bottom: 12px;
-    }
-    .socials {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-    .socials a {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      font-family: Outfit, sans-serif;
-      font-weight: 800;
-      font-size: 14px;
-      letter-spacing: -0.03em;
-      text-decoration: none;
-      padding: 10px 14px;
-      min-height: 44px;
-    }
-    .socials a:hover { filter: brightness(1.07); }
-    .ig-logo {
-      width: 22px; height: 22px;
-      border-radius: 7px;
-      background: radial-gradient(circle at 30% 110%, #fccc63, #fccc63 20%, #f77737 40%, #e1306c 60%, #c13584 75%, #833ab4);
-      display: grid;
-      place-items: center;
-      flex-shrink: 0;
-    }
-    .ig-logo svg { width: 13px; height: 13px; fill: #fff; }
-    .socials a.ig { background: #1a1216; color: #fff; }
-    .tt-logo {
-      width: 22px; height: 22px;
-      display: grid;
-      place-items: center;
-      flex-shrink: 0;
-    }
-    .tt-logo svg { width: 16px; height: 16px; }
-    .socials a.tt { background: #111; color: #fff; }
-
-    .wall {
-      display: flex;
-      flex-wrap: nowrap;
-      gap: 6px;
-      justify-content: center;
-      margin: 8px auto 28px;
-      max-width: 100%;
-      overflow: hidden;
-    }
-    .chip {
-      font-size: clamp(15px, 4.6vw, 20px);
-      line-height: 1;
-      opacity: .8;
-      animation: wobble 3s ease-in-out infinite;
-    }
-    .chip:nth-child(odd) { animation-delay: .4s; }
-    @keyframes wobble {
-      0%,100% { transform: translateY(0) rotate(-6deg); }
-      50% { transform: translateY(-6px) rotate(8deg); }
-    }
-    footer {
-      text-align: center;
-      color: var(--muted);
-      font-size: 12px;
-      line-height: 1.75;
-      padding: 0 8px;
-    }
-    footer a { color: var(--cheese); text-decoration: none; }
-    .toast {
-      position: fixed;
-      bottom: max(20px, env(safe-area-inset-bottom));
-      left: 50%;
-      transform: translateX(-50%) translateY(20px);
-      background: var(--cheese);
-      color: var(--ink);
-      padding: 10px 16px;
-      font-weight: 700;
-      opacity: 0;
-      pointer-events: none;
-      transition: .25s ease;
-      z-index: 12;
-      max-width: calc(100% - 32px);
-      text-align: center;
-      font-size: 13px;
-    }
-    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-
-    .modal-bg {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,.72);
-      z-index: 20;
-      display: none;
-      align-items: flex-end;
-      justify-content: center;
-      padding: 16px;
-    }
-    .modal-bg.open { display: flex; }
-    .modal {
-      background: #14110c;
-      border: 1px solid rgba(242,193,78,.28);
-      max-width: 520px;
-      width: 100%;
-      max-height: min(78vh, 620px);
-      display: flex;
-      flex-direction: column;
-      padding: 22px 20px 18px;
-    }
-    .modal h3 {
-      font-family: Outfit, sans-serif;
-      font-size: 22px;
-      margin-bottom: 12px;
-    }
-    .modal-body {
-      overflow-y: auto;
-      color: #cbb892;
-      font-size: 13px;
-      line-height: 1.7;
-      padding-right: 6px;
-    }
-    .modal-body ol { padding-left: 18px; margin: 10px 0 14px; }
-    .modal-body li { margin-bottom: 8px; }
-    .modal-close {
-      margin-top: 16px;
-      align-self: flex-end;
-      background: var(--cheese);
-      color: var(--ink);
-      border: 0;
-      padding: 10px 14px;
-      font-family: inherit;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    @media (max-width: 680px) {
-      .grid { grid-template-columns: 1fr; }
-      .row { flex-direction: column; }
-      header { align-items: center; gap: 8px; }
-      .mark { font-size: 14px; }
-      .pill { max-width: 46%; }
-      
-      .stack-wrap { height: 150px; }
-      .chip:nth-child(n+7) { display: none; }
-      .socials a { width: 100%; justify-content: center; }
-      .socials a { width: 100%; justify-content: center; }
-      .year { font-size: 12px; }
-    }
-    @media (min-width: 681px) {
-      .wrap { padding: 48px 22px 80px; }
-      header { margin-bottom: 56px; }
-      button.send { width: auto; }
-      input { width: auto; flex: 1; }
-      .modal-bg { align-items: center; }
+    @media print {
+      .no-print {
+        display: none !important;
+      }
+      body {
+        background: #ffffff !important;
+      }
+      .print-only-card {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem !important;
+      }
+      .card-sheet {
+        width: 6in !important;
+        min-height: 4in !important;
+        border: 2px solid #0f172a !important;
+        page-break-inside: avoid;
+      }
     }
   </style>
 </head>
-<body>
-  <div class="field" id="field"></div>
-  <div class="wrap">
-    <header>
-      <div class="mark">🍔 Chezburger Games</div>
-      <div class="pill">Roblox Game Development</div>
-    </header>
-    <section class="hero">
-      <div class="stack-wrap" id="plate">
-        <div class="stack" id="burger">
-          <div class="sesame"></div>
-          <div class="tomato"></div>
-          <div class="cheese"></div>
-          <div class="patty"></div>
-          <div class="lettuce"></div>
-          <div class="bottom"></div>
-        </div>
-        <button class="hit" id="hit" type="button" aria-label="eat the chezburger"></button>
-      </div>
-      <div class="tally" id="tally">burgers eaten <b id="count">0</b></div>
-      <div class="kicker">Woeller23 Ventures Presents:</div>
-      <h1>Chezburger<br /><span>Games</span></h1>
-      <p class="sub">
-        A Roblox game studio that cooks what the crowd actually wants.
-        Your ideas. Your feedback. Our kitchen.
-      </p>
-      <div class="year">Launching <b>2026</b> · coming soon</div>
-    </section>
-    <div class="wall" aria-hidden="true">
-      <span class="chip">🍔</span><span class="chip">🍔</span><span class="chip">🍔</span>
-      <span class="chip">🍔</span><span class="chip">🍔</span><span class="chip">🍔</span>
-      <span class="chip">🍔</span><span class="chip">🍔</span><span class="chip">🍔</span>
-      <span class="chip">🍔</span>
-    </div>
-    <div class="grid">
-      <article class="card">
-        <span class="emoji">🧠</span>
-        <h2>Audience-built</h2>
-        <p>We don’t lock special ideas in a vault. You pitch the game, the add-ons, the everything. The community votes. We build the ones that slap.</p>
-      </article>
-      <article class="card">
-        <span class="emoji">💬</span>
-        <h2>Feedback is the recipe</h2>
-        <p>Playtests, suggestions, and “this is mid, fix it” comments are part of our creative process — not an afterthought.</p>
-      </article>
-      <article class="card">
-        <span class="emoji">🧱</span>
-        <h2>Made for Roblox</h2>
-        <p>If it doesn’t work in a Roblox server with your friends, we didn't make it.</p>
-      </article>
-      <article class="card">
-        <span class="emoji">📢</span>
-        <h2>Loud on purpose</h2>
-        <p>If it isn’t fun in the first 30 seconds, it doesn’t leave our kitchen. Mmmmm, Chezburger.</p>
-      </article>
-    </div>
-    <section class="pitch">
-      <h2>Drop an idea. We’ll chew on it.</h2>
-      <p>
-        The plan is simple: take the game ideas people actually ask for, pressure-test them in public,
-        and turn the best ones into games you can jump into with friends.
-      </p>
-      <p class="reward">
-        If we pick your game idea, we’ll send you 1000 Robux.
-        <br />
-        <button type="button" class="terms-link" id="terms-open">Subject to terms and conditions</button>
-      </p>
-      <form id="idea-form" action="https://formsubmit.co/ajax/henry@fransoo.com" method="POST">
-        <input type="hidden" name="_subject" value="Chezburger Games idea" />
-        <input type="hidden" name="_template" value="table" />
-        <input type="hidden" name="_captcha" value="false" />
-        <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
-        <div class="row">
-          <input type="text" name="name" placeholder="what should we call you" required />
-          <input type="email" name="email" placeholder="your email (so we can reply)" />
-        </div>
-        <textarea name="idea" placeholder="the game you wish existed on Roblox…" required></textarea>
-        <button type="submit" class="send" id="send-btn">send it</button>
-      </form>
-    </section>
-    <section class="follow">
-      <h3>Follow Chezburger</h3>
-      <div class="socials">
-        <a class="ig" href="https://instagram.com/chezburgergames" target="_blank" rel="noopener">
-          <span class="ig-logo" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm10 2H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3zm-5 3.2A4.8 4.8 0 1 1 7.2 12 4.8 4.8 0 0 1 12 7.2zm0 2A2.8 2.8 0 1 0 14.8 12 2.8 2.8 0 0 0 12 9.2zM17.6 6.1a1.1 1.1 0 1 1-1.1 1.1 1.1 1.1 0 0 1 1.1-1.1z"/></svg>
-          </span>
-          Instagram
-        </a>
-        <a class="tt" href="https://tiktok.com/@chezburgergames" target="_blank" rel="noopener">
-          <span class="tt-logo" aria-hidden="true">
-            <svg viewBox="0 0 24 24">
-              <path fill="#25F4EE" d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z" transform="translate(-1.05 .7)"/>
-              <path fill="#FE2C55" d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z" transform="translate(1.1 -.55)"/>
-              <path fill="#fff" d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/>
-            </svg>
-          </span>
-          TikTok
-        </a>
-      </div>
-    </section>
-    <footer>
-      A Project By Henry Fransoo / Woeller23 Ventures<br />
-      Mmm, Chezburger · launching 2026<br />
-      <a href="https://fransoo.com">fransoo.com</a>
-    </footer>
+<body class="antialiased selection:bg-indigo-100 selection:text-indigo-900">
+
+  <!-- Toast Notification Banner (No alert() used) -->
+  <div id="toast-banner" class="fixed bottom-5 right-5 z-50 hidden max-w-md bg-slate-900 text-white px-4 py-3 rounded-2xl shadow-2xl border border-slate-700 flex items-center gap-3 text-xs sm:text-sm">
+    <span class="w-2.5 h-2.5 rounded-full bg-amber-400 shrink-0 animate-pulse"></span>
+    <span id="toast-message" class="font-medium"></span>
   </div>
 
-  <div class="modal-bg" id="terms" role="dialog" aria-modal="true" aria-labelledby="terms-title">
-    <div class="modal">
-      <h3 id="terms-title">1000 Robux terms</h3>
-      <div class="modal-body">
-        <p>If we build your idea, you get 1000 Robux. That only happens if all of this is true:</p>
-        <ol>
-          <li>The game is finished and published publicly on Roblox. Payout is after release, not while it’s still in development.</li>
-          <li>The game has been live for at least one week from the launch date.</li>
-          <li>When we email you, you send back the Roblox username you want paid to.</li>
-        </ol>
-        <p>If your idea is selected, we email the address you put on the form. You reply with a username, and we send the Robux straight to that profile.</p>
-        <p>If more than one person sends the same idea, the payout goes to whoever submitted it first — through this form or a comment on one of our videos.</p>
-      </div>
-      <button type="button" class="modal-close" id="terms-close">got it</button>
-    </div>
-  </div>
+  <!-- Sticky Top Academic Header & Navigation -->
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-xs no-print">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between py-3.5 gap-3">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-600 to-violet-700 text-white flex items-center justify-center font-extrabold text-sm shadow-sm">
+              1202
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <h1 class="text-base sm:text-lg font-extrabold tracking-tight text-slate-900">GNED 1202 • Midterm Exam 2 Mastery Hub</h1>
+                <span class="hidden sm:inline-flex px-2 py-0.5 rounded-full text-[11px] font-bold bg-indigo-50 text-indigo-700 border border-indigo-200">Prof. Derynck</span>
+              </div>
+              <p class="text-xs text-slate-500">Zero-to-Mastery Course Outlines • MC, T/F &amp; Jung Matching Test • 2-Sided 4"×6" Cue Card</p>
+            </div>
+          </div>
+        </div>
 
-  <div class="toast" id="toast"></div>
+        <!-- Primary Navigation Tabs -->
+        <nav class="flex flex-wrap items-center gap-1.5 bg-slate-100 p-1.5 rounded-xl border border-slate-200/80" aria-label="Main Sections">
+          <button type="button" onclick="switchSection('guide')" id="tab-guide"
+            class="nav-tab px-3.5 py-2 rounded-lg text-xs sm:text-sm font-bold transition-all bg-indigo-600 text-white shadow-xs">
+            1. Zero-to-Mastery Study Guide
+          </button>
+          <button type="button" onclick="switchSection('practice')" id="tab-practice"
+            class="nav-tab px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold text-slate-700 hover:bg-white/80 transition-all">
+            2. Practice Test (MC, T/F &amp; Matching)
+          </button>
+          <button type="button" onclick="switchSection('cuecard')" id="tab-cuecard"
+            class="nav-tab px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold text-slate-700 hover:bg-white/80 transition-all">
+            3. 2-Sided 4"×6" Cue Card
+          </button>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 space-y-8">
+
+    <!-- =================================================================== -->
+    <!-- SECTION 1: ZERO-TO-MASTERY STUDY GUIDE & FRONT-TO-BACK OUTLINES     -->
+    <!-- =================================================================== -->
+    <section id="section-guide" class="space-y-6">
+
+      <!-- Hero & Exam Format Architecture (56 Points Total) -->
+      <div class="bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 text-white rounded-3xl p-6 sm:p-8 shadow-lg border border-indigo-800/40">
+        <div class="flex flex-col lg:flex-row lg:items-start justify-between gap-6">
+          <div class="space-y-2.5 max-w-3xl">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/20 border border-indigo-400/30 text-indigo-200 text-xs font-bold">
+              <span>Zero-to-Mastery Curriculum</span>
+              <span>•</span>
+              <span>56 Total Exam Points</span>
+            </div>
+            <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight font-serif-academic">
+              Everything You Need to Know—Even If You Haven't Read a Single Page
+            </h2>
+            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+              Built strictly from Professor Derynck’s Midterm Exam 2 Study Guide, the 29-minute video walkthrough transcript, and the assigned readings. Master the exact exam format rules below, then work through all 7 front-to-back module outlines.
+            </p>
+          </div>
+
+          <!-- Progress Counter Box -->
+          <div class="bg-white/10 backdrop-blur-sm border border-white/15 rounded-2xl p-4 lg:w-64 shrink-0 flex flex-col justify-between">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold uppercase tracking-wider text-indigo-200">Modules Mastered</span>
+              <span id="mastery-counter" class="text-lg font-extrabold text-amber-300">0 / 7</span>
+            </div>
+            <p class="text-[11px] text-slate-300 mt-1.5 leading-relaxed">
+              Check off each module card below as you learn its plot, characters, and key terms.
+            </p>
+          </div>
+        </div>
+
+        <!-- 5-Part Midterm Format Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 mt-6">
+          <div class="bg-white/10 border border-white/15 rounded-2xl p-3.5">
+            <div class="flex items-center justify-between text-xs font-bold text-indigo-300">
+              <span>1. Multiple Choice</span>
+              <span>16 pts</span>
+            </div>
+            <p class="text-sm font-extrabold mt-1">Do 16 of 18</p>
+            <p class="text-[11px] text-slate-300 mt-1 leading-snug">
+              Skip 2 you blank on. <strong>Never answer all 18</strong>—Prof only grades the first 16 he sees!
+            </p>
+          </div>
+
+          <div class="bg-white/10 border border-white/15 rounded-2xl p-3.5">
+            <div class="flex items-center justify-between text-xs font-bold text-purple-300">
+              <span>2. True / False</span>
+              <span>8 pts</span>
+            </div>
+            <p class="text-sm font-extrabold mt-1">Do 8 of 10</p>
+            <p class="text-[11px] text-slate-300 mt-1 leading-snug">
+              Skip 2. Circle T or F clearly; erase completely if changing answers.
+            </p>
+          </div>
+
+          <div class="bg-white/10 border border-white/15 rounded-2xl p-3.5">
+            <div class="flex items-center justify-between text-xs font-bold text-cyan-300">
+              <span>3. Jung Matching</span>
+              <span>10 pts</span>
+            </div>
+            <p class="text-sm font-extrabold mt-1">12 Terms &rarr; / 10</p>
+            <p class="text-[11px] text-slate-300 mt-1 leading-snug">
+              Terms are in <strong>English</strong>! Fill all 12 blanks (never leave blanks). Up to 2 wrong still gets 10/10.
+            </p>
+          </div>
+
+          <div class="bg-white/10 border border-white/15 rounded-2xl p-3.5">
+            <div class="flex items-center justify-between text-xs font-bold text-emerald-300">
+              <span>4. Short Ans (2×)</span>
+              <span>16 pts</span>
+            </div>
+            <p class="text-sm font-extrabold mt-1">Do 4 of 6 (2×2×4)</p>
+            <p class="text-[11px] text-slate-300 mt-1 leading-snug">
+              Write question # in blank! Point form OK, but expand clearly—no 2-word answers.
+            </p>
+          </div>
+
+          <div class="bg-white/10 border border-white/15 rounded-2xl p-3.5">
+            <div class="flex items-center justify-between text-xs font-bold text-amber-300">
+              <span>5. MLK Short (3×)</span>
+              <span>6 pts</span>
+            </div>
+            <p class="text-sm font-extrabold mt-1">Do 1 of 2 (2×3×1)</p>
+            <p class="text-[11px] text-slate-300 mt-1 leading-snug">
+              <strong>Pro Tip:</strong> Booklet order isn’t mandatory—do short answers first if worried about time!
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Search Bar, Topic Pills & Expand/Collapse Controls -->
+      <div class="bg-white rounded-2xl p-4 border border-slate-200 shadow-xs space-y-3">
+        <div class="flex flex-col md:flex-row gap-3 items-stretch md:items-center justify-between">
+          <div class="relative flex-1">
+            <input type="text" id="study-search" oninput="searchStudyHub(this.value)"
+              placeholder="Search characters, terms, chapters (e.g., 'Smyrna', 'Socrates', 'mungu', 'Haber', 'Jezebel', '666')..."
+              class="w-full pl-4 pr-4 py-2.5 rounded-xl border border-slate-300 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          </div>
+          <div class="flex gap-2 shrink-0">
+            <button type="button" onclick="toggleAllDetails(true)" class="px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold transition">
+              Expand All Outlines
+            </button>
+            <button type="button" onclick="toggleAllDetails(false)" class="px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold transition">
+              Collapse All
+            </button>
+          </div>
+        </div>
+
+        <!-- Topic Filter Pills -->
+        <div class="flex flex-wrap gap-1.5 pt-1">
+          <button type="button" onclick="filterTopics('all', this)" class="topic-pill px-3 py-1.5 rounded-lg text-xs font-bold bg-indigo-600 text-white shadow-xs transition">All 7 Modules</button>
+          <button type="button" onclick="filterTopics('jung', this)" class="topic-pill px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">1. Carl Jung</button>
+          <button type="button" onclick="filterTopics('manu', this)" class="topic-pill px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">2. Leviticus &amp; Manusmriti</button>
+          <button type="button" onclick="filterTopics('revelation', this)" class="topic-pill px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">3. Revelation</button>
+          <button type="button" onclick="filterTopics('mlk', this)" class="topic-pill px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">4. MLK Jr. Speeches</button>
+          <button type="button" onclick="filterTopics('mill', this)" class="topic-pill px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">5. J.S. Mill</button>
+          <button type="button" onclick="filterTopics('leguin', this)" class="topic-pill px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">6. Lathe of Heaven</button>
+          <button type="button" onclick="filterTopics('films', this)" class="topic-pill px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">7. Films (MC/TF Only)</button>
+        </div>
+      </div>
+
+      <!-- 7 Comprehensive Study Module Cards -->
+      <div id="study-modules-container" class="space-y-5">
+
+        <!-- MODULE 1: CARL JUNG -->
+        <article class="topic-card bg-white rounded-3xl border border-slate-200 shadow-xs overflow-hidden" data-topic="jung">
+          <div class="bg-gradient-to-r from-cyan-900 to-slate-900 text-white p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div>
+              <div class="flex flex-wrap items-center gap-2 mb-1">
+                <span class="px-2.5 py-0.5 rounded-md text-xs font-extrabold bg-cyan-500/30 text-cyan-200 border border-cyan-400/30">Module 1</span>
+                <span class="text-xs text-cyan-200 font-semibold">Tested on: MC • T/F • 12-Term Matching • Short Answer Q1</span>
+              </div>
+              <h3 class="text-xl sm:text-2xl font-extrabold font-serif-academic">Carl Jung — "The Archetype in Dream Symbolism"</h3>
+            </div>
+            <label class="inline-flex items-center gap-2 bg-white/10 hover:bg-white/15 px-3.5 py-2 rounded-xl cursor-pointer text-xs font-bold shrink-0">
+              <input type="checkbox" class="module-check rounded text-cyan-500" onchange="updateMasteryCount()" />
+              <span>Mark Mastered</span>
+            </label>
+          </div>
+
+          <div class="p-5 sm:p-6 space-y-4 text-xs sm:text-sm text-slate-700">
+            <!-- Prof Derynck Insider Tip -->
+            <div class="bg-cyan-50 border border-cyan-200 rounded-2xl p-4 text-cyan-950">
+              <strong class="font-extrabold">Prof. Derynck’s Video &amp; Guide Tip:</strong> Matching terms are in <strong>English</strong> this time (12 terms, scored out of 10). MC &amp; T/F also test the <strong>hero’s adventure stages</strong>. For Short Answer Q1 ("primitive" vs. "civilized" strengths &amp; weaknesses), Jung covers this specifically on the <strong>last two pages (pp. 120–123)</strong> of the PDF—and you can draw a two-column comparison table on the exam!
+            </div>
+
+            <!-- Accordion A: Core Terms for Matching -->
+            <details open class="border border-slate-200 rounded-2xl overflow-hidden">
+              <summary class="bg-slate-50 hover:bg-slate-100 px-4 py-3 font-extrabold text-slate-900 cursor-pointer flex items-center justify-between">
+                <span>A. Core Vocabulary &amp; Matching Concepts (12 Key Terms)</span>
+                <span class="text-xs text-indigo-600 font-bold">Toggle</span>
+              </summary>
+              <div class="p-4 grid grid-cols-1 md:grid-cols-2 gap-3 bg-white">
+                <div class="p-3 rounded-xl bg-slate-50 border border-slate-200/80">
+                  <strong class="text-slate-900">1. Compensation:</strong> Dreams are normal psychic phenomena that transmit unconscious reactions or spontaneous impulses to balance one-sided or faulty conscious attitudes.
+                </div>
+                <div class="p-3 rounded-xl bg-slate-50 border border-slate-200/80">
+                  <strong class="text-slate-900">2. Circumambulation:</strong> Reading all aspects of an ordinary dream-image by gathering personal associative material and context from the dreamer.
+                </div>
+                <div class="p-3 rounded-xl bg-slate-50 border border-slate-200/80">
+                  <strong class="text-slate-900">3. Archaic remnants / Primordial images:</strong> Aboriginal, innate, inherited patterns in highly emotional, obsessive, or recurrent dreams that cannot be explained by personal experience.
+                </div>
+                <div class="p-3 rounded-xl bg-slate-50 border border-slate-200/80">
+                  <strong class="text-slate-900">4. Archetype (Gk. <em>arche</em> "origin" + <em>tupos</em> "imprint"):</strong> NOT inherited fixed ideas/pictures, but an <em>inherited instinctive tendency</em> of the human mind to form varying representations around a universal mythological motif (like bird nest-building).
+                </div>
+                <div class="p-3 rounded-xl bg-slate-50 border border-slate-200/80">
+                  <strong class="text-slate-900">5. Représentations collectives:</strong> Universal mythological motifs and social complexes found across all cultures, times, and races without known origin or historical migration.
+                </div>
+                <div class="p-3 rounded-xl bg-slate-50 border border-slate-200/80">
+                  <strong class="text-slate-900">6. Apocatastasis (Restitution):</strong> The cosmic motif that at the end of time—or after destruction—everything is restored to its original, perfect state (Acts 3:21; 1 Cor 15:22).
+                </div>
+                <div class="p-3 rounded-xl bg-slate-50 border border-slate-200/80">
+                  <strong class="text-slate-900">7. Quaternity:</strong> A fourfold divine totality (e.g., God coming from the "four corners" as four gods), prominent in Eastern philosophy and Hermetic alchemy, contrasted with the Christian Trinity.
+                </div>
+                <div class="p-3 rounded-xl bg-slate-50 border border-slate-200/80">
+                  <strong class="text-slate-900">8. Adumbratio:</strong> An anticipatory shadow cast ahead over a person’s life and dreams by the unknown approach of a fatal illness or death.
+                </div>
+                <div class="p-3 rounded-xl bg-slate-50 border border-slate-200/80">
+                  <strong class="text-slate-900">9. Tabula rasa:</strong> The false assumption—caused by equating the psyche exclusively with consciousness—that the human mind is completely blank at birth.
+                </div>
+                <div class="p-3 rounded-xl bg-slate-50 border border-slate-200/80">
+                  <strong class="text-slate-900">10. Prognostication / Precognition:</strong> The unconscious perceiving subliminal facts and poetically anticipating a future outcome (e.g., fatal fever as a burning house) before consciousness knows it.
+                </div>
+                <div class="p-3 rounded-xl bg-slate-50 border border-slate-200/80">
+                  <strong class="text-slate-900">11. Numinosity:</strong> The peculiar emotional fascination, awe, or spell emanating from archetypes and sacred rituals that grips people and shapes religions and nations.
+                </div>
+                <div class="p-3 rounded-xl bg-slate-50 border border-slate-200/80">
+                  <strong class="text-slate-900">12. Mana / Mungu:</strong> An all-pervading divine power or extraordinary spiritual efficacy; Mount Elgon tribesmen use <em>mungu</em> for the sacred moment of sunrise.
+                </div>
+              </div>
+            </details>
+
+            <!-- Accordion B: Front-to-Back Case Studies -->
+            <details open class="border border-slate-200 rounded-2xl overflow-hidden">
+              <summary class="bg-slate-50 hover:bg-slate-100 px-4 py-3 font-extrabold text-slate-900 cursor-pointer flex items-center justify-between">
+                <span>B. Front-to-Back Walkthrough of Every Case Study in the Reading</span>
+                <span class="text-xs text-indigo-600 font-bold">Toggle</span>
+              </summary>
+              <div class="p-4 space-y-3 bg-white">
+                <div class="border-l-4 border-cyan-600 pl-3.5">
+                  <strong class="text-slate-900">Case 1 — The Panicked Professor &amp; the 400-Year-Old Woodcut (p. 109):</strong> An educated professor had a sudden vision and feared he was going insane. Jung pulled a 400-year-old book off his shelf showing the exact same motif in an old woodcut, proving the image was an ancient collective archetype rather than personal madness.
+                </div>
+                <div class="border-l-4 border-cyan-600 pl-3.5">
+                  <strong class="text-slate-900">Case 2 — The 8-Year-Old Girl’s 12 Christmas Dreams (pp. 109–114):</strong> A psychiatrist father gave Jung a booklet of 12 fairytale-like dreams ("Once upon a time...") written by his 10-year-old daughter from when she was 8; she died of an infectious disease a year later.
+                  <ul class="list-disc ml-5 mt-1 space-y-1 text-xs text-slate-600">
+                    <li><strong>The 12 Dreams in Order:</strong> (1) Multi-horned snakelike "bad animal" devours all animals, then God comes as 4 gods from the 4 corners to give rebirth; (2) Ascent to heaven where pagan dances occur, descent to hell where angels do good deeds [relativization of moral values]; (3) Small animals grow huge and devour her; (4) Small mouse penetrated by worms, snakes, fishes, and humans becomes human [4-stage creation of mankind]; (5) Drop of water under microscope full of branches [origin of world]; (6) Bad boy throws bits of earth turning passers-by bad; (7) Drunken woman falls in water and emerges sober/renewed; (8) People in America roll in ant heap, dreamer falls into river; (9) Desert on moon, sinks deep into ground to reach hell; (10) Touches luminous ball, vapors emerge, man kills her; (11) Dangerously ill, birds burst from her skin and cover her; (12) Gnats hide sun, moon, and stars except one star that falls on her.</li>
+                    <li><strong>Jung’s Analysis:</strong> 9 of the 12 dreams revolve around <strong>destruction and restoration (apocatastasis)</strong>, alongside cosmogonic creation myths (dreams 4 &amp; 5). Despite a superficial Protestant upbringing, her dreams contained non-Christian symbols like the divine <strong>quaternity</strong> and Gerard Dorn’s 17th-century alchemical <em>quadricornutus serpens</em> (four-horned serpent). Because she was approaching both puberty and early death, the dreams acted as an <em>adumbratio</em>—an initiatory preparation for death (like primitive puberty rites or Zen koans).</li>
+                  </ul>
+                </div>
+                <div class="border-l-4 border-cyan-600 pl-3.5">
+                  <strong class="text-slate-900">Case 3 — Origin of Reflective Consciousness (p. 116):</strong> Jung suggests reflective consciousness emerged from violent emotional shocks—such as a primitive man strangling his beloved only son in anger over catching no fish and being seized with eternal regret, or Spanish hidalgo <strong>Ramón Lull</strong> pursuing a secret lady who revealed her cancer-eaten bosom, shocking him into becoming a holy man.
+                </div>
+                <div class="border-l-4 border-cyan-600 pl-3.5">
+                  <strong class="text-slate-900">Case 4 — Prognostic Fever Dreams (pp. 116–117):</strong> In the 2nd century A.D., <strong>Artemidoros of Daldis</strong> recorded a man dreaming his father burned in a house fire before dying himself of <em>phlegmone</em> (high fever/pneumonia). Similarly, a former patient dreamed Jung’s colleague was perishing in a great fire three weeks before the doctor died of a gangrenous fever—showing the unconscious poetically portrays the body as an earthly house destroyed by fire.
+                </div>
+                <div class="border-l-4 border-cyan-600 pl-3.5">
+                  <strong class="text-slate-900">Case 5 — Mount Elgon Sunrise Ritual (p. 120):</strong> In East Africa, Mount Elgon tribesmen exit their huts at dawn and breathe or spit into their hands toward the rising sun—offering their "soul substance" (breath/spittle) to <em>mungu</em> (the sacred moment of sunrise). When asked why, they were baffled: "We have always done it." As Goethe’s <em>Faust</em> says, <em>"Im Anfang war die Tat"</em> ("In the beginning was the deed"): deeds come first unconsciously, reflection comes much later.
+                </div>
+                <div class="border-l-4 border-cyan-600 pl-3.5">
+                  <strong class="text-slate-900">Case 6 — Modern "Compartment Psychology" (pp. 122–123):</strong> A philosophy/psychology professor who denied the unconscious became obsessed with having cancer despite clear X-rays; his conscious willpower could not stop the autonomous fear. Likewise, an alcoholic "miraculously cured" by a religious revival relapsed weeks later, and the group sent him to a medical clinic—illustrating modern dissociation between conscious reason and unconscious powers.
+                </div>
+              </div>
+            </details>
+
+            <!-- Accordion C: Primitive vs Civilized Table (Short Answer Q1) -->
+            <details open class="border border-slate-200 rounded-2xl overflow-hidden">
+              <summary class="bg-slate-50 hover:bg-slate-100 px-4 py-3 font-extrabold text-slate-900 cursor-pointer flex items-center justify-between">
+                <span>C. Short Answer Q1: "Primitive" vs. "Civilized" People (Strengths &amp; Weaknesses)</span>
+                <span class="text-xs text-indigo-600 font-bold">Toggle</span>
+              </summary>
+              <div class="p-4 overflow-x-auto bg-white">
+                <table class="w-full text-left border-collapse text-xs">
+                  <thead>
+                    <tr class="bg-slate-900 text-white">
+                      <th class="p-3 rounded-tl-xl">Group</th>
+                      <th class="p-3">Strengths (What They Have)</th>
+                      <th class="p-3 rounded-tr-xl">Weaknesses (What They Lack / Suffer From)</th>
+                    </tr>
+                  </thead>
+                  <tbody class="divide-y divide-slate-200">
+                    <tr>
+                      <td class="p-3 font-extrabold text-slate-900 align-top">So-Called "Primitive" People</td>
+                      <td class="p-3 align-top space-y-1">
+                        <p>• <strong>Deeply connected to the unconscious &amp; instincts:</strong> They <em>live</em> their symbols emotionally rather than merely analyzing them intellectually (e.g., Mt. Elgon sunrise offering of breath/spittle to <em>mungu</em>).</p>
+                        <p>• <strong>Intact mythic/ritual therapy:</strong> Sacred rituals and initiations provide emotional meaning and protection against existential suffering.</p>
+                      </td>
+                      <td class="p-3 align-top space-y-1">
+                        <p>• <strong>Lack of conscious reflection &amp; willpower:</strong> Cannot explain why they perform their rituals ("We have always done it"); low reflective consciousness.</p>
+                        <p>• <strong>Hampered by fears &amp; superstitions:</strong> Paralyzed at every step by doubts, taboos, spirits, and demons; require chanting/drumming just to work up energy to act.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="p-3 font-extrabold text-slate-900 align-top">So-Called "Civilized" People</td>
+                      <td class="p-3 align-top space-y-1">
+                        <p>• <strong>High willpower, rationality &amp; efficiency:</strong> Can translate ideas into action immediately without chanting, drumming, or daily ritual prayer ("Where there's a will there's a way").</p>
+                        <p>• <strong>Historical/conscious knowledge:</strong> Can trace symbolic origins (e.g., knowing more intellectually about Christmas trees than primitives know about their rites).</p>
+                      </td>
+                      <td class="p-3 align-top space-y-1">
+                        <p>• <strong>Blindness to unconscious powers &amp; lack of introspection:</strong> Hubristic illusion of total free will and self-control; severe dissociation ("compartment psychology").</p>
+                        <p>• <strong>Possessed by renamed "gods and demons":</strong> Unconscious forces return as neuroses, restlessness, vague apprehensions, addictions to pills/alcohol/tobacco, and irrational phobias (e.g., cancer-phobic professor).</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </details>
+          </div>
+        </article>
+
+        <!-- MODULE 2: LEVITICUS & THE MANUSMRITI -->
+        <article class="topic-card bg-white rounded-3xl border border-slate-200 shadow-xs overflow-hidden" data-topic="manu">
+          <div class="bg-gradient-to-r from-amber-900 to-slate-900 text-white p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div>
+              <div class="flex flex-wrap items-center gap-2 mb-1">
+                <span class="px-2.5 py-0.5 rounded-md text-xs font-extrabold bg-amber-500/30 text-amber-200 border border-amber-400/30">Module 2</span>
+                <span class="text-xs text-amber-200 font-semibold">Tested on: MC • T/F • Short Answer Q2 (Karma &amp; Caste)</span>
+              </div>
+              <h3 class="text-xl sm:text-2xl font-extrabold font-serif-academic">Leviticus &amp; the Manusmriti (Laws of Manu)</h3>
+            </div>
+            <label class="inline-flex items-center gap-2 bg-white/10 hover:bg-white/15 px-3.5 py-2 rounded-xl cursor-pointer text-xs font-bold shrink-0">
+              <input type="checkbox" class="module-check rounded text-amber-500" onchange="updateMasteryCount()" />
+              <span>Mark Mastered</span>
+            </label>
+          </div>
+
+          <div class="p-5 sm:p-6 space-y-4 text-xs sm:text-sm text-slate-700">
+            <div class="bg-amber-50 border border-amber-200 rounded-2xl p-4 text-amber-950">
+              <strong class="font-extrabold">Prof. Derynck’s Study Guide &amp; Video Focus:</strong> More MC and T/F questions test the <strong>Manusmriti</strong> than Leviticus, though comparative questions ask how Leviticus is similar or different. Pay special attention to: (1) karma &amp; caste justification, (2) the <strong>five most serious sins</strong> in Manu, (3) <strong>sattva / rajas / tamas</strong> applied to food purity, and (4) how both treat women and sexuality differently.
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+                <h4 class="font-extrabold text-slate-900">1. Karma &amp; Caste Rationalization (Short Answer Q2)</h4>
+                <p><strong>What is Karma?</strong> In Hindu belief, <em>karma</em> is the cosmic law of moral cause and effect across the cycle of rebirth (<em>samsara</em>). Good deeds and adherence to sacred duty (<em>dharma</em>) yield merit leading to higher rebirth; bad deeds yield demerit leading to lower rebirth (lower caste, animal, or suffering).</p>
+                <p><strong>How Manusmriti Justifies Caste:</strong> Manu links cosmic creation (the four <em>varnas</em> emerging from Purusha/Brahma: Brahmins from the mouth, Kshatriyas from arms, Vaishyas from thighs, Shudras from feet) with karma. Because a person’s birth caste reflects their past-life metaphysical merit, Brahmin superiority and social hierarchy are framed as deserved cosmic justice rather than arbitrary oppression—motivating lower castes to obey their caste duty (<em>svadharma</em>) for a better future rebirth.</p>
+              </div>
+
+              <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+                <h4 class="font-extrabold text-slate-900">2. Three Gunas &amp; Food Purity (Sattva / Rajas / Tamas)</h4>
+                <ul class="list-disc ml-5 space-y-1">
+                  <li><strong>Sattva (Purity, Light, Goodness):</strong> Pure, nourishing, non-violent foods (e.g., milk, ghee, fruits, grains) that promote clarity, wisdom, and spiritual elevation—appropriate for Brahmins.</li>
+                  <li><strong>Rajas (Passion, Activity, Restlessness):</strong> Stimulating, spicy, salty, or overly rich foods that excite desire, energy, and worldly ambition.</li>
+                  <li><strong>Tamas (Darkness, Inertia, Impurity):</strong> Stale, decayed, foul, intoxicating, or impure foods (e.g., alcohol/<em>sura</em>, garlic/onions, forbidden meats) that dull the mind and cause spiritual degradation.</li>
+                </ul>
+              </div>
+
+              <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+                <h4 class="font-extrabold text-slate-900">3. Five Most Serious Sins in Manusmriti (Mahapatakas)</h4>
+                <p>According to the <em>Manusmriti</em>, the five mortal sins requiring severe penance are:</p>
+                <ol class="list-decimal ml-5 space-y-1 font-medium text-slate-800">
+                  <li>Killing a Brahmin (<em>Brahmahatya</em>)</li>
+                  <li>Drinking intoxicating liquor (<em>Sura</em>, especially by twice-born castes)</li>
+                  <li>Stealing gold (especially from a Brahmin)</li>
+                  <li>Committing adultery with a guru’s/teacher’s wife</li>
+                  <li>Associating with anyone who commits these four grave sins</li>
+                </ol>
+              </div>
+
+              <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+                <h4 class="font-extrabold text-slate-900">4. Leviticus vs. Manusmriti: Parallels &amp; Divergences</h4>
+                <ul class="list-disc ml-5 space-y-1">
+                  <li><strong>Parallels:</strong> Both establish strict ritual purity codes (clean vs. unclean foods, bodily emissions), priestly privilege (Levites vs. Brahmins), and patriarchal control over women’s bodies and marriage.</li>
+                  <li><strong>Divergences (Video Highlight!):</strong> While both are problematic regarding sexuality, they differ in specifics—for instance, as Prof. Derynck notes in the video, <strong>one explicitly condemns lesbianism whereas Leviticus does not even acknowledge that lesbians exist</strong> (Leviticus focuses on male same-sex acts, bestiality, and menstrual/ritual impurity).</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- MODULE 3: REVELATION TO JOHN -->
+        <article class="topic-card bg-white rounded-3xl border border-slate-200 shadow-xs overflow-hidden" data-topic="revelation">
+          <div class="bg-gradient-to-r from-rose-900 to-slate-900 text-white p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div>
+              <div class="flex flex-wrap items-center gap-2 mb-1">
+                <span class="px-2.5 py-0.5 rounded-md text-xs font-extrabold bg-rose-500/30 text-rose-200 border border-rose-400/30">Module 3</span>
+                <span class="text-xs text-rose-200 font-semibold">Tested on: MC • T/F • Short Answer Q3 (Ch. 7, 14, 20 Quotes)</span>
+              </div>
+              <h3 class="text-xl sm:text-2xl font-extrabold font-serif-academic">The Revelation to John (Chapters 1–22)</h3>
+            </div>
+            <label class="inline-flex items-center gap-2 bg-white/10 hover:bg-white/15 px-3.5 py-2 rounded-xl cursor-pointer text-xs font-bold shrink-0">
+              <input type="checkbox" class="module-check rounded text-rose-500" onchange="updateMasteryCount()" />
+              <span>Mark Mastered</span>
+            </label>
+          </div>
+
+          <div class="p-5 sm:p-6 space-y-4 text-xs sm:text-sm text-slate-700">
+            <div class="bg-rose-50 border border-rose-200 rounded-2xl p-4 text-rose-950">
+              <strong class="font-extrabold">Prof. Derynck’s Video &amp; Guide Tip:</strong> You don’t need a verse-by-verse memorization, but know everything highlighted in the slides: (1) <strong>Which of the 7 Churches are praised/blamed and why</strong>, (2) <strong>how Christ is portrayed</strong>, and (3) <strong>how the evil characters are portrayed</strong>. For Short Answer Q3, avoid vague "they go to heaven" answers—use specific quotes/details from <strong>Chapters 7, 14, and 20</strong>!
+            </div>
+
+            <!-- Accordion A: Cast of Characters -->
+            <details open class="border border-slate-200 rounded-2xl overflow-hidden">
+              <summary class="bg-slate-50 hover:bg-slate-100 px-4 py-3 font-extrabold text-slate-900 cursor-pointer flex items-center justify-between">
+                <span>A. Cast of Key Figures: Christ vs. The Evil Characters</span>
+                <span class="text-xs text-indigo-600 font-bold">Toggle</span>
+              </summary>
+              <div class="p-4 grid grid-cols-1 md:grid-cols-2 gap-4 bg-white">
+                <div class="p-4 rounded-2xl bg-indigo-50/70 border border-indigo-200 space-y-2">
+                  <h4 class="font-extrabold text-indigo-950">How Christ Is Portrayed (3 Major Forms)</h4>
+                  <ul class="list-disc ml-5 space-y-1 text-xs">
+                    <li><strong>1. Son of Man Among 7 Lampstands (Ch. 1):</strong> Robe to feet, golden sash, hair white like wool/snow, <strong>eyes like blazing fire</strong>, feet like glowing bronze, voice like rushing waters, holding <strong>seven stars</strong> (angels of the 7 churches) in his right hand, and a <strong>sharp double-edged sword</strong> coming out of his mouth; holds keys of death and Hades.</li>
+                    <li><strong>2. Slain Lamb / Lion of Judah (Ch. 5):</strong> Worthy to open the 7-sealed scroll; appears as a <strong>Lamb looking as if slain</strong>, standing at the center of the throne with <strong>seven horns and seven eyes</strong> (seven spirits of God).</li>
+                    <li><strong>3. Conquering Rider on a White Horse (Ch. 19):</strong> Called <em>Faithful and True</em>, <em>The Word of God</em>, and <em>KING OF KINGS AND LORD OF LORDS</em>; eyes like blazing fire, many crowns, robe dipped in blood, sharp sword from mouth to strike down nations, rules with an <strong>iron scepter</strong>.</li>
+                  </ul>
+                </div>
+
+                <div class="p-4 rounded-2xl bg-rose-50/70 border border-rose-200 space-y-2">
+                  <h4 class="font-extrabold text-rose-950">How the Evil Characters Are Portrayed</h4>
+                  <ul class="list-disc ml-5 space-y-1 text-xs">
+                    <li><strong>1. The Great Red Dragon (Ch. 12):</strong> Identified as the ancient serpent, the devil, or Satan; has <strong>seven heads, ten horns, and seven crowns</strong>; tail sweeps a third of stars from the sky; tries to devour the pregnant woman’s male child; defeated by Archangel Michael and hurled to earth.</li>
+                    <li><strong>2. The Beast from the Sea (Ch. 13):</strong> Given power/throne by the Dragon; has <strong>ten horns, seven heads, ten crowns</strong>, blasphemous names, body like a leopard, feet like a bear, mouth like a lion; one head had a <strong>fatal wound that was healed</strong>; wages war on God’s holy people for 42 months.</li>
+                    <li><strong>3. The Beast from the Earth / False Prophet (Ch. 13):</strong> Has <strong>two horns like a lamb, but speaks like a dragon</strong>; performs deceptive signs (calling fire from heaven); animates an image of the first beast; forces everyone to receive the <strong>mark of the beast (666)</strong> on right hand or forehead to buy or sell.</li>
+                    <li><strong>4. Babylon the Great / Great Prostitute (Ch. 17–18):</strong> Rides the scarlet 7-headed beast; dressed in purple, scarlet, gold, pearls; holds golden cup of abominations; <strong>drunk with the blood of God’s holy people</strong>; symbolizes imperial Rome/corrupt empire; destroyed in one hour while kings and merchants weep.</li>
+                  </ul>
+                </div>
+              </div>
+            </details>
+
+            <!-- Accordion B: Seven Churches Table -->
+            <details open class="border border-slate-200 rounded-2xl overflow-hidden">
+              <summary class="bg-slate-50 hover:bg-slate-100 px-4 py-3 font-extrabold text-slate-900 cursor-pointer flex items-center justify-between">
+                <span>B. The Seven Churches of Asia Minor (Ch. 2–3) — Praise vs. Blame Matrix</span>
+                <span class="text-xs text-indigo-600 font-bold">Toggle</span>
+              </summary>
+              <div class="p-4 overflow-x-auto bg-white">
+                <table class="w-full text-left border-collapse text-xs">
+                  <thead>
+                    <tr class="bg-slate-900 text-white">
+                      <th class="p-2.5 rounded-tl-xl">Church</th>
+                      <th class="p-2.5">What Christ Praises</th>
+                      <th class="p-2.5 rounded-tr-xl">What Christ Condemns / Blames</th>
+                    </tr>
+                  </thead>
+                  <tbody class="divide-y divide-slate-200">
+                    <tr>
+                      <td class="p-2.5 font-extrabold">1. Ephesus</td>
+                      <td class="p-2.5">Hard work, perseverance, testing false apostles, hating practices of the <strong>Nicolaitans</strong>.</td>
+                      <td class="p-2.5 text-rose-700 font-medium"><strong>Forsaken the love you had at first</strong> (threatens to remove lampstand).</td>
+                    </tr>
+                    <tr class="bg-emerald-50/50">
+                      <td class="p-2.5 font-extrabold text-emerald-900">2. Smyrna (NO BLAME!)</td>
+                      <td class="p-2.5 text-emerald-900">Enduring afflictions, poverty ("yet you are rich!"), slander from "synagogue of Satan"; told to be faithful unto death for victor’s crown.</td>
+                      <td class="p-2.5 font-bold text-emerald-700">NONE — Only praised!</td>
+                    </tr>
+                    <tr>
+                      <td class="p-2.5 font-extrabold">3. Pergamum</td>
+                      <td class="p-2.5">Remaining true to Christ’s name even where "Satan has his throne" and martyr <strong>Antipas</strong> was killed.</td>
+                      <td class="p-2.5 text-rose-700 font-medium">Tolerating teachings of <strong>Balaam</strong> (eating idol food &amp; sexual immorality) and the <strong>Nicolaitans</strong>.</td>
+                    </tr>
+                    <tr>
+                      <td class="p-2.5 font-extrabold">4. Thyatira</td>
+                      <td class="p-2.5">Love, faith, service, perseverance—doing more now than at first.</td>
+                      <td class="p-2.5 text-rose-700 font-medium">Tolerating false prophetess <strong>Jezebel</strong>, who misleads servants into sexual immorality and idol food.</td>
+                    </tr>
+                    <tr>
+                      <td class="p-2.5 font-extrabold">5. Sardis</td>
+                      <td class="p-2.5">Only a few people who have not soiled their clothes (will walk dressed in white).</td>
+                      <td class="p-2.5 text-rose-700 font-medium"><strong>Reputation of being alive, but spiritually dead</strong>; unfinished deeds ("Wake up!").</td>
+                    </tr>
+                    <tr class="bg-emerald-50/50">
+                      <td class="p-2.5 font-extrabold text-emerald-900">6. Philadelphia (NO BLAME!)</td>
+                      <td class="p-2.5 text-emerald-900">Having "little strength" yet keeping Christ’s word, not denying his name, patient endurance; given an <strong>open door no one can shut</strong>.</td>
+                      <td class="p-2.5 font-bold text-emerald-700">NONE — Only praised!</td>
+                    </tr>
+                    <tr>
+                      <td class="p-2.5 font-extrabold">7. Laodicea</td>
+                      <td class="p-2.5 text-slate-400 italic">No praise given (only discipline out of love).</td>
+                      <td class="p-2.5 text-rose-700 font-medium"><strong>Lukewarm (neither hot nor cold)</strong>—about to be spit out; arrogant about material wealth while spiritually wretched, pitiful, poor, blind, and naked.</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </details>
+
+            <!-- Accordion C: Front-to-Back Plot & Ch 7/14/20 Quotes -->
+            <details open class="border border-slate-200 rounded-2xl overflow-hidden">
+              <summary class="bg-slate-50 hover:bg-slate-100 px-4 py-3 font-extrabold text-slate-900 cursor-pointer flex items-center justify-between">
+                <span>C. Front-to-Back Plot Summary (Ch. 1–22) &amp; Short Answer Q3 Quotes</span>
+                <span class="text-xs text-indigo-600 font-bold">Toggle</span>
+              </summary>
+              <div class="p-4 space-y-2.5 bg-white text-xs">
+                <p><strong>Ch. 1–3 (Exile on Patmos &amp; 7 Letters):</strong> John is exiled on the island of Patmos for preaching Jesus. Christ appears among 7 golden lampstands and dictates messages to the 7 churches in Asia.</p>
+                <p><strong>Ch. 4–5 (Heavenly Throne Room &amp; 7-Sealed Scroll):</strong> John sees God’s emerald-encircled throne, 24 elders, and 4 living creatures (lion, ox, man, eagle). Only the slain Lamb is worthy to open the 7-sealed scroll.</p>
+                <p><strong>Ch. 6–11 (7 Seals &amp; 7 Trumpets):</strong> Opening the first 4 seals releases the Four Horsemen (White/conquest, Red/war, Black/famine, Pale/Death &amp; Hades). The 5th seal reveals slain martyrs under the altar asking "How long?" before receiving white robes. In <strong>Ch. 7</strong>, 144,000 from Israel’s 12 tribes are sealed on their foreheads, followed by an uncountable multitude in white robes out of the great tribulation. The 7 trumpets bring ecological plagues (star Wormwood, locusts from Abyss under Abaddon/Apollyon) and the two witnesses in Jerusalem (Ch. 11) who are killed by the Beast and resurrected after 3.5 days.</p>
+                <p><strong>Ch. 12–14 (Cosmic War, Two Beasts &amp; Harvest):</strong> The Dragon is cast from heaven by Michael and pursues the woman’s offspring via the Sea Beast and Earth Beast (666). In <strong>Ch. 14</strong>, the Lamb stands on Mount Zion with the 144,000, angels proclaim Babylon’s fall and eternal torment for beast-worshipers, and a heavenly voice blesses those who die in the Lord before the earth is reaped in the winepress of wrath.</p>
+                <p><strong>Ch. 15–19 (7 Bowls of Wrath &amp; Fall of Babylon):</strong> Seven angels pour out 7 bowls of wrath (sores, sea/rivers to blood, scorching sun, darkness, Armageddon, massive earthquake). Babylon the Great is destroyed (Ch. 17–18), followed by the Wedding Supper of the Lamb and Christ riding the white horse to cast the Beast and False Prophet into the lake of burning sulfur (Ch. 19).</p>
+                <p><strong>Ch. 20–22 (Millennium, Judgment &amp; New Jerusalem):</strong> Satan is bound in the Abyss for 1,000 years. In <strong>Ch. 20</strong>, beheaded martyrs who refused the beast’s mark come to life in the <strong>first resurrection</strong> to reign with Christ for 1,000 years; after Satan’s final defeat, all dead are judged before the Great White Throne by the Book of Life. In <strong>Ch. 21–22</strong>, a New Heaven, New Earth, and cube-shaped New Jerusalem (with the River and Tree of Life) descend from heaven.</p>
+              </div>
+            </details>
+          </div>
+        </article>
+
+        <!-- MODULE 4: MARTIN LUTHER KING JR. -->
+        <article class="topic-card bg-white rounded-3xl border border-slate-200 shadow-xs overflow-hidden" data-topic="mlk">
+          <div class="bg-gradient-to-r from-indigo-900 to-slate-900 text-white p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div>
+              <div class="flex flex-wrap items-center gap-2 mb-1">
+                <span class="px-2.5 py-0.5 rounded-md text-xs font-extrabold bg-indigo-500/30 text-indigo-200 border border-indigo-400/30">Module 4</span>
+                <span class="text-xs text-indigo-200 font-semibold">Tested on: 1 Easy MC • Triple-Value Short Answer (6 pts!)</span>
+              </div>
+              <h3 class="text-xl sm:text-2xl font-extrabold font-serif-academic">Martin Luther King Jr. — Two Speeches</h3>
+            </div>
+            <label class="inline-flex items-center gap-2 bg-white/10 hover:bg-white/15 px-3.5 py-2 rounded-xl cursor-pointer text-xs font-bold shrink-0">
+              <input type="checkbox" class="module-check rounded text-indigo-500" onchange="updateMasteryCount()" />
+              <span>Mark Mastered</span>
+            </label>
+          </div>
+
+          <div class="p-5 sm:p-6 space-y-4 text-xs sm:text-sm text-slate-700">
+            <div class="bg-indigo-50 border border-indigo-200 rounded-2xl p-4 text-indigo-950">
+              <strong class="font-extrabold">Prof. Derynck’s Tip:</strong> Knowing the two speech titles (<em>"I Have a Dream"</em> and <em>"Paul’s Letter to American Christians"</em>) gets you the 1 MC question immediately. For the triple-value short answer (worth 6 pts!), decide ahead of time which question you are answering and put exact quotes on your cue card so your answer proves you read the speeches rather than relying on vague generalities.
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <!-- Speech 1 -->
+              <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+                <h4 class="font-extrabold text-slate-900">Speech 1: "I Have a Dream" (1963) — Front-to-Back</h4>
+                <ul class="list-disc ml-5 space-y-1 text-xs">
+                  <li><strong>100 Years After Emancipation:</strong> Lincoln’s Emancipation Proclamation was a beacon of hope, yet 100 years later Black Americans remain crippled by segregation and poverty.</li>
+                  <li><strong>The Bad Check / Promissory Note:</strong> The Constitution and Declaration of Independence signed a promissory note guaranteeing life, liberty, and pursuit of happiness to all, but America gave Black citizens a check marked "insufficient funds." The movement comes to Washington to cash this check at the bank of justice.</li>
+                  <li><strong>Fierce Urgency of Now:</strong> Rejects the "tranquilizing drug of gradualism"—now is the time to rise from segregation to racial justice.</li>
+                  <li><strong>Nonviolent Dignity &amp; Discipline:</strong> Warns against drinking from the "cup of bitterness and hatred" or degenerating into physical violence; urges meeting "physical force with soul force" alongside white allies whose destiny is tied to theirs.</li>
+                  <li><strong>Redemptive Suffering &amp; Refusal to Be Satisfied:</strong> Cannot be satisfied amid police brutality, motel discrimination, ghettos, "whites only" signs, and disenfranchisement—<em>"until justice rolls down like waters, and righteousness like a mighty stream."</em></li>
+                  <li><strong>The Dream &amp; Freedom Ringing:</strong> Visions of former slaves and slave owners’ sons at the table of brotherhood, children judged by character rather than skin color, and freedom ringing from every mountainside until all sing <em>"Free at last."</em></li>
+                </ul>
+              </div>
+
+              <!-- Speech 2 -->
+              <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+                <h4 class="font-extrabold text-slate-900">Speech 2: "Paul’s Letter to American Christians" (1958)</h4>
+                <ul class="list-disc ml-5 space-y-1 text-xs">
+                  <li><strong>Framing Device:</strong> Delivered to the Board of Missions; MLK reads an imaginary letter written by the Apostle Paul from Crete to American Christians in 1958, noting we live in an "inescapable network of mutuality."</li>
+                  <li><strong>Scientific Progress vs. Moral Lag:</strong> Praises subways, airplanes, skyscrapers, and medicine, but warns America allowed "material means... to outdistance the spiritual ends," turning the world into a neighborhood without making it a brotherhood.</li>
+                  <li><strong>Colony of Heaven (Dual Citizenship):</strong> Condemns determining morality by a "Gallup Poll of the majority opinion." Christians live in time and eternity ("a colony of heaven") and owe ultimate allegiance to God over man-made laws.</li>
+                  <li><strong>Misuse of Capitalism:</strong> Warns against gross materialism (judging success by salary/car wheelbase) and extreme inequality (0.1% controlling &gt;40% of wealth); rejects atheistic communism while urging democratic reform to wipe out poverty.</li>
+                  <li><strong>Divided &amp; Segregated Church:</strong> Criticizes 256+ warring Protestant denominations, Roman Catholic claims to papal infallibility, and Sunday 11:00 AM ("the most segregated hour of Christian America"), refuting the false "curse of Ham" justification.</li>
+                  <li><strong>Moderation &amp; Love (<em>Summum Bonum</em>):</strong> Defines true moderation as "wise restraint and calm reasonableness," whereas slowing down justice is a tragic vice. Urges nonviolence ("Put up your sword") and concludes that <strong>Love</strong>—not eloquence, knowledge, or loveless martyrdom—is the highest good (<em>summum bonum</em>).</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Short Answer Prep Box -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-1">
+              <div class="p-4 rounded-2xl bg-indigo-50/80 border border-indigo-200 text-xs space-y-1.5">
+                <h4 class="font-extrabold text-indigo-950">MLK Short Answer Option 1: Four Cardinal Virtues</h4>
+                <p>The four cardinal virtues of the ancient world are <strong>Justice, Temperance (Moderation), Courage (Fortitude), and Prudence (Wisdom)</strong>. Most students pick:</p>
+                <p>• <strong>Justice:</strong> Central to both speeches—cashing the promissory note at the bank of justice, ending segregation/poverty, and quoting Amos ("until justice rolls down like waters").</p>
+                <p>• <strong>Moderation / Temperance:</strong> In <em>Paul’s Letter</em>, MLK explicitly distinguishes true moderation ("wise restraint and calm reasonableness") from cowardly gradualism, and demands disciplined nonviolence ("soul force," "Put up your sword").</p>
+              </div>
+              <div class="p-4 rounded-2xl bg-purple-50/80 border border-purple-200 text-xs space-y-1.5">
+                <h4 class="font-extrabold text-purple-950">MLK Short Answer Option 2: Sowell’s Visions</h4>
+                <p>• <strong>Unconstrained Vision (Moral Optimism):</strong> MLK believes human society can fundamentally eradicate entrenched evils like racism and poverty through moral transformation, love, and democratic reform ("wipe poverty from the face of the earth").</p>
+                <p>• <strong>Constrained Vision (Flawed Nature &amp; Divine Authority):</strong> As a Baptist minister, MLK recognizes human ego, spiritual pride ("Man has a tragic capacity to relegate a heightening virtue to a tragic vice"), and rejects human majority consensus ("Gallup Poll") in favor of eternal divine law.</p>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- MODULE 5: J.S. MILL'S UTILITARIANISM -->
+        <article class="topic-card bg-white rounded-3xl border border-slate-200 shadow-xs overflow-hidden" data-topic="mill">
+          <div class="bg-gradient-to-r from-teal-900 to-slate-900 text-white p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div>
+              <div class="flex flex-wrap items-center gap-2 mb-1">
+                <span class="px-2.5 py-0.5 rounded-md text-xs font-extrabold bg-teal-500/30 text-teal-200 border border-teal-400/30">Module 5</span>
+                <span class="text-xs text-teal-200 font-semibold">Tested on: MC • T/F • Short Answer Q6</span>
+              </div>
+              <h3 class="text-xl sm:text-2xl font-extrabold font-serif-academic">J.S. Mill — "Utilitarianism" (Chapter II)</h3>
+            </div>
+            <label class="inline-flex items-center gap-2 bg-white/10 hover:bg-white/15 px-3.5 py-2 rounded-xl cursor-pointer text-xs font-bold shrink-0">
+              <input type="checkbox" class="module-check rounded text-teal-500" onchange="updateMasteryCount()" />
+              <span>Mark Mastered</span>
+            </label>
+          </div>
+
+          <div class="p-5 sm:p-6 space-y-4 text-xs sm:text-sm text-slate-700">
+            <div class="bg-teal-50 border border-teal-200 rounded-2xl p-4 text-teal-950">
+              <strong class="font-extrabold">Prof. Derynck’s Story Framing (Video &amp; Guide):</strong> Imagine Mill as a protagonist presenting his Greatest Happiness Principle and defending it against <strong>three antagonists</strong>: (1) critics who say he overemphasizes happiness or degrades humans to pigs, (2) critics who say his standard demands too much of ordinary people, and (3) critics who worry utilitarianism is godless/expedient and justifies ruthless behavior like <strong>Haber</strong> in <em>The Lathe of Heaven</em>.
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+                <h4 class="font-extrabold text-slate-900">1. Core Definition &amp; Quality of Pleasures</h4>
+                <ul class="list-disc ml-5 space-y-1 text-xs">
+                  <li><strong>Greatest Happiness Principle:</strong> Actions are right in proportion as they tend to promote happiness (pleasure and absence of pain), wrong as they produce unhappiness (pain and privation of pleasure)—for <strong>all sentient beings</strong>, not just the agent.</li>
+                  <li><strong>"Doctrine Worthy Only of Swine" Objection:</strong> Critics claim pleasure as life’s end reduces humans to beasts. Mill replies that humans possess elevated intellectual, imaginative, and moral faculties.</li>
+                  <li><strong>Quality vs. Quantity:</strong> Pleasures differ in <em>quality</em>, not just quantity. Competent judges experienced in both always prefer higher faculties: <em>"It is better to be a human being dissatisfied than a pig satisfied; better to be Socrates dissatisfied than a fool satisfied."</em></li>
+                  <li><strong>Infirmity of Character:</strong> People sometimes choose nearer lower pleasures out of weakness or lose noble tastes if society/occupations starve them ("a very tender plant"), not because they genuinely judge lower pleasures superior.</li>
+                </ul>
+              </div>
+
+              <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+                <h4 class="font-extrabold text-slate-900">2. Antagonist 1: Happiness, Sacrifice &amp; Education</h4>
+                <ul class="list-disc ml-5 space-y-1 text-xs">
+                  <li><strong>Is Happiness Unattainable?</strong> Critics (like Carlyle) ask "What right hast thou to be happy?" Mill clarifies happiness is not continuous rapture, but moments of rapture amid few pains, active pursuits, <strong>tranquillity and excitement</strong>, and unselfish affections.</li>
+                  <li><strong>What Does Mill Think of Sacrifice?</strong> Readiness to sacrifice one’s own happiness for others is the highest virtue in an imperfect world, <strong>ONLY when it increases total happiness for others</strong>. Self-sacrifice for its own sake is wasted ("no more deserving of admiration than the ascetic mounted on his pillar").</li>
+                  <li><strong>What Does Mill Think of Education?</strong> Wretched education and bad laws are the main obstacles to happiness. Education and public opinion should create an <em>"indissoluble association"</em> in every mind between one’s own happiness and the good of the whole (echoing Jesus’s Golden Rule).</li>
+                </ul>
+              </div>
+
+              <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+                <h4 class="font-extrabold text-slate-900">3. Antagonist 2: Demanding Too Much (Rule vs. Motive)</h4>
+                <ul class="list-disc ml-5 space-y-1 text-xs">
+                  <li><strong>Rule of Action vs. Motive:</strong> Critics claim utilitarianism demands people always act from a grand motive of serving all humanity. Mill replies this confuses the <em>standard of duty</em> with the <em>motive</em>: 99% of actions are rightly done from everyday motives.</li>
+                  <li><strong>Motive Does Not Determine Action’s Morality:</strong> Saving someone from drowning is morally right whether motivated by duty or hope of reward; betraying a friend is wrong even to help another friend.</li>
+                  <li><strong>Private vs. Public Utility:</strong> Only rare public benefactors affect society at large; ordinary people need only consider <em>private utility</em> (the few people directly affected), while respecting others’ rights.</li>
+                </ul>
+              </div>
+
+              <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+                <h4 class="font-extrabold text-slate-900">4. Antagonist 3: Expediency, Veracity &amp; Short Answer Q6</h4>
+                <ul class="list-disc ml-5 space-y-1 text-xs">
+                  <li><strong>Long-Term Utility vs. Short-Term Expediency:</strong> Telling a lie for immediate convenience is harmful because undermining human trustworthiness damages civilization on the largest scale (with rare, strictly defined exceptions like withholding fatal news from someone dangerously ill).</li>
+                  <li><strong>Secondary Principles (No Time to Calculate):</strong> Humanity has had all of history to learn action tendencies, creating inherited moral rules ("landmarks" or a sailor’s <em>Nautical Almanack</em>) so we don’t recalculate from scratch before every act.</li>
+                  <li><strong>Short Answer Q6 (Unconstrained vs. Constrained in Mill):</strong> <em>Unconstrained:</em> human nature is malleable via education/laws, and social evils like poverty and disease are "conquerable by human care and effort." <em>Constrained:</em> Mill acknowledges human "infirmity of character," imperfect happiness, limits of individual calculation, and reliance on inherited "secondary principles."</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- MODULE 6: LE GUIN'S THE LATHE OF HEAVEN -->
+        <article class="topic-card bg-white rounded-3xl border border-slate-200 shadow-xs overflow-hidden" data-topic="leguin">
+          <div class="bg-gradient-to-r from-violet-900 to-slate-900 text-white p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div>
+              <div class="flex flex-wrap items-center gap-2 mb-1">
+                <span class="px-2.5 py-0.5 rounded-md text-xs font-extrabold bg-violet-500/30 text-violet-200 border border-violet-400/30">Module 6</span>
+                <span class="text-xs text-violet-200 font-semibold">Tested on: MC • T/F (No Short Answer)</span>
+              </div>
+              <h3 class="text-xl sm:text-2xl font-extrabold font-serif-academic">Ursula K. Le Guin — "The Lathe of Heaven" (Ch. 5 end – Ch. 9+)</h3>
+            </div>
+            <label class="inline-flex items-center gap-2 bg-white/10 hover:bg-white/15 px-3.5 py-2 rounded-xl cursor-pointer text-xs font-bold shrink-0">
+              <input type="checkbox" class="module-check rounded text-violet-500" onchange="updateMasteryCount()" />
+              <span>Mark Mastered</span>
+            </label>
+          </div>
+
+          <div class="p-5 sm:p-6 space-y-4 text-xs sm:text-sm text-slate-700">
+            <div class="bg-violet-50 border border-violet-200 rounded-2xl p-4 text-violet-950">
+              <strong class="font-extrabold">Prof. Derynck’s Study Guide Checklist:</strong> Tested via MC and T/F only. Remember that the <strong>tail end of Chapter 5</strong> is on this exam! Know the major characters (<strong>George Orr</strong>, <strong>Dr. William Haber</strong>, <strong>Heather Lelache</strong>) and the exact sequence of Haber’s dream interventions and unintended disasters.
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+                <h4 class="font-extrabold text-slate-900">1. Haber’s "Fixes" &amp; Unintended Results</h4>
+                <ul class="list-disc ml-5 space-y-1 text-xs">
+                  <li><strong>Overpopulation (Tail of Ch. 5):</strong> Haber commands George to solve overpopulation &rarr; George dreams of a catastrophic plague ("The Plague") that wipes out billions, leaving a half-empty world.</li>
+                  <li><strong>Peace on Earth &rarr; Alien Invasion (Ch. 6–7):</strong> Haber tells George to dream of peace on Earth &rarr; George dreams of extraterrestrials invading the Moon and Earth, forcing warring human nations to unite against a common alien enemy.</li>
+                  <li><strong>Racial Conflict &rarr; Uniform Gray Skin (Ch. 8–9):</strong> Haber commands George to eliminate racial hatred &rarr; everyone on Earth becomes a uniform battleship-gray color (erasing diversity, and erasing Heather Lelache’s existence in the new timeline!).</li>
+                </ul>
+              </div>
+
+              <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+                <h4 class="font-extrabold text-slate-900">2. Key Exam Details: Ch. 7, Aliens &amp; Ch. 9</h4>
+                <ul class="list-disc ml-5 space-y-1 text-xs">
+                  <li><strong>Chapter 7 Revelations (Lelache &amp; Original Reality):</strong> Reveals Heather Lelache’s background (mixed-race heritage—Black father, white mother—who struggled with identity and strength) and confirms memories of the <em>original reality</em> (before the April 1998 nuclear apocalypse that George dreamed away at age 17).</li>
+                  <li><strong>The Aliens (Cause, Appearance, Speech):</strong> Caused by Haber’s "peace on Earth" command. Described as large, turtle/crab-like sea-floor beings (bulky, greenish/carapace-like, awkward on land in environmental suits) who communicate telepathically/non-verbally ("iahklu'" / dream-speak) and actually understand dreaming and the Taoist flow of reality far better than Haber.</li>
+                  <li><strong>Chapter 9 Drastic World Shift &amp; Impact on Lelache:</strong> Following the "no racial conflict" dream, society becomes sterile, uniform, and gray; because Heather Lelache was born of a mixed-race marriage, she <strong>never existed</strong> in this gray timeline—devastating George, who had loved and married her in the prior reality.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- MODULE 7: FILMS (MC/TF CONTEXT ONLY) -->
+        <article class="topic-card bg-white rounded-3xl border border-slate-200 shadow-xs overflow-hidden" data-topic="films">
+          <div class="bg-gradient-to-r from-slate-800 to-slate-900 text-white p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div>
+              <div class="flex flex-wrap items-center gap-2 mb-1">
+                <span class="px-2.5 py-0.5 rounded-md text-xs font-extrabold bg-slate-600 text-slate-100">Module 7</span>
+                <span class="text-xs text-amber-300 font-semibold">MC &amp; T/F Context Only (Short Answers #4 &amp; #5 Excluded Per Your Request)</span>
+              </div>
+              <h3 class="text-xl sm:text-2xl font-extrabold font-serif-academic">Films: "Idiocracy" &amp; "Snowpiercer" (MC &amp; T/F Reference)</h3>
+            </div>
+            <label class="inline-flex items-center gap-2 bg-white/10 hover:bg-white/15 px-3.5 py-2 rounded-xl cursor-pointer text-xs font-bold shrink-0">
+              <input type="checkbox" class="module-check rounded text-indigo-500" onchange="updateMasteryCount()" />
+              <span>Mark Mastered</span>
+            </label>
+          </div>
+
+          <div class="p-5 sm:p-6 text-xs sm:text-sm text-slate-700 space-y-3">
+            <p>
+              Per your instructions, <strong>both film short-answer questions (#4 and #5) are excluded</strong> from your short-answer plan and cue card. However, in case you choose to answer any Multiple Choice or True/False items touching on these films, keep Prof. Derynck’s two study-guide points in mind:
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200">
+                <strong class="text-slate-900 block mb-1">1. Hero’s Journey Parallels (MC &amp; T/F):</strong>
+                <p class="text-xs">Both <em>Idiocracy</em> (Joe Bauers awakening in 2505) and <em>Snowpiercer</em> (Curtis Everett leading the tail-section revolt forward through the train cars) are analyzed on MC/T/F questions via Joseph Campbell’s <strong>Hero’s Journey</strong> stages (call to adventure, crossing thresholds, trials, apotheosis/elixir).</p>
+              </div>
+              <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200">
+                <strong class="text-slate-900 block mb-1">2. Three Dystopian Lecture Themes (Video Transcript):</strong>
+                <p class="text-xs">In the video walkthrough, Prof. Derynck notes his slides group both films around three dystopian worries: (a) how <strong>knowledge/intelligence</strong> is used or suppressed, (b) how <strong>people treat one another</strong> (class hierarchy/exploitation vs. apathy), and (c) how human behavior affects the <strong>environment</strong>.</p>
+              </div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- SECTION 2: INTERACTIVE PRACTICE EXAM (MC, T/F & JUNG MATCHING)      -->
+    <!-- =================================================================== -->
+    <section id="section-practice" class="hidden space-y-6">
+
+      <!-- Practice Exam Header & Real Midterm Rule Simulator -->
+      <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm">
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+          <div>
+            <span class="px-2.5 py-1 rounded-full text-xs font-bold bg-indigo-100 text-indigo-800">Authentic Midterm 2 Simulator (34 Total Points)</span>
+            <h2 class="text-2xl font-extrabold text-slate-900 mt-1.5">Practice Exam: Multiple Choice, True/False &amp; Jung Matching</h2>
+            <p class="text-sm text-slate-600 mt-1">
+              Enforces the exact exam booklet rules: answer <strong>16 of 18</strong> MC, <strong>8 of 10</strong> True/False, and <strong>all 12 Jung Matching terms</strong> (scored out of 10, giving you 2 free misses).
+            </p>
+          </div>
+
+          <!-- Live Choice Counters -->
+          <div class="flex flex-wrap gap-3">
+            <div class="bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3 text-center">
+              <div class="text-xs font-bold text-slate-500 uppercase">Part A • MC</div>
+              <div id="mc-count-badge" class="text-xl font-extrabold text-indigo-600">0 / 16</div>
+              <div class="text-[11px] text-slate-400">18 avail (skip 2)</div>
+            </div>
+            <div class="bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3 text-center">
+              <div class="text-xs font-bold text-slate-500 uppercase">Part B • T/F</div>
+              <div id="tf-count-badge" class="text-xl font-extrabold text-indigo-600">0 / 8</div>
+              <div class="text-[11px] text-slate-400">10 avail (skip 2)</div>
+            </div>
+            <div class="bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3 text-center">
+              <div class="text-xs font-bold text-slate-500 uppercase">Part C • Matching</div>
+              <div id="match-count-badge" class="text-xl font-extrabold text-cyan-600">0 / 12</div>
+              <div class="text-[11px] text-slate-400">Scored / 10 (2 buffer)</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Score Banner (Hidden until graded) -->
+        <div id="exam-result-banner" class="hidden mt-5 p-5 rounded-2xl bg-indigo-950 text-white flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <p class="text-xs uppercase tracking-wider text-indigo-300 font-bold">Total Objective Practice Exam Score (Out of 34)</p>
+            <p id="exam-score-text" class="text-2xl sm:text-3xl font-extrabold mt-0.5">0 / 34 (0%)</p>
+            <p id="exam-feedback-sub" class="text-xs text-slate-300 mt-1"></p>
+          </div>
+          <button type="button" onclick="resetPracticeExam()" class="px-5 py-2.5 rounded-xl bg-white text-slate-900 font-bold text-xs hover:bg-slate-100 transition shrink-0">
+            Reset &amp; Retake Test
+          </button>
+        </div>
+      </div>
+
+      <!-- Part A: Multiple Choice (18 Questions, Pick 16) -->
+      <div class="space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+          <h3 class="text-lg font-extrabold text-slate-900">Part A: Multiple Choice (Choose 16 of 18 — 16 pts)</h3>
+          <span class="text-xs text-slate-500">Click an option to select; click again to clear/skip.</span>
+        </div>
+        <div id="mc-questions-container" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+      </div>
+
+      <!-- Part B: True / False (10 Questions, Pick 8) -->
+      <div class="space-y-4 pt-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+          <h3 class="text-lg font-extrabold text-slate-900">Part B: True / False (Choose 8 of 10 — 8 pts)</h3>
+          <span class="text-xs text-slate-500">Click T or F to select; click again to clear/skip.</span>
+        </div>
+        <div id="tf-questions-container" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+      </div>
+
+      <!-- Part C: Matching — Jung Terms (12 Terms, Marked Out of 10) -->
+      <div class="space-y-4 pt-4">
+        <div class="bg-cyan-950 text-white rounded-2xl p-5 flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <div class="flex items-center gap-2 mb-1">
+              <span class="px-2.5 py-0.5 rounded-md text-xs font-extrabold bg-cyan-500/30 text-cyan-200 border border-cyan-400/30">Part C • 10 Points</span>
+              <span class="text-xs font-bold text-amber-300">Terms in English • 2-Error Buffer</span>
+            </div>
+            <h3 class="text-lg sm:text-xl font-extrabold">Part C: Matching — Carl Jung Terms (12 Terms, Marked Out of 10)</h3>
+            <p class="text-xs sm:text-sm text-cyan-100 mt-1 leading-relaxed">
+              Per Prof. Derynck’s rules: match each English Jung term with its definition (<strong>A–L</strong>). Each definition is used <strong>once</strong>, and you must fill in <strong>all 12 blanks</strong> (never leave blanks—guess if unsure!). Marked out of 10, so up to 2 wrong still gets 10/10.
+            </p>
+          </div>
+          <div id="matching-duplicate-warning" class="hidden bg-amber-500/20 border border-amber-400 text-amber-200 rounded-xl px-4 py-2.5 text-xs font-bold shrink-0">
+            Duplicate definition letter selected! Each letter A–L should be used once.
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
+          <!-- Left 7 Cols: 12 Jung Terms & Dropdown Selectors -->
+          <div class="lg:col-span-7 bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
+            <div class="bg-slate-900 text-white px-4 py-3 text-xs font-bold flex items-center justify-between">
+              <span>Jung Reading / Lecture Term (1–12)</span>
+              <span>Select Definition (A–L)</span>
+            </div>
+            <div id="matching-terms-container" class="divide-y divide-slate-200"></div>
+          </div>
+
+          <!-- Right 5 Cols: Definition Bank (A–L) -->
+          <div class="lg:col-span-5 bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
+            <div class="bg-cyan-900 text-white px-4 py-3 text-xs font-bold flex items-center justify-between">
+              <span>Definitions Bank (A–L)</span>
+              <span class="text-cyan-200 font-normal">Green = Assigned</span>
+            </div>
+            <div id="matching-definitions-bank" class="divide-y divide-slate-100 p-2 space-y-1.5 text-xs"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Submit Bar -->
+      <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
+        <p class="text-xs sm:text-sm text-slate-600">
+          Ready to grade all 3 objective sections (16 MC + 8 T/F + 10 Matching = 34 points)? Explanations referencing the assigned texts will appear below every item.
+        </p>
+        <div class="flex gap-3 w-full sm:w-auto">
+          <button type="button" onclick="resetPracticeExam()" class="w-1/2 sm:w-auto px-4 py-2.5 rounded-xl border border-slate-300 text-slate-700 font-semibold text-sm hover:bg-slate-50">
+            Clear All
+          </button>
+          <button type="button" onclick="gradePracticeExam()" class="w-1/2 sm:w-auto px-6 py-2.5 rounded-xl bg-indigo-600 text-white font-bold text-sm hover:bg-indigo-700 shadow-sm">
+            Grade My Practice Exam
+          </button>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- SECTION 3: TWO-SIDED 4"x6" CUE CARD BUILDER (SHORT ANSWERS)         -->
+    <!-- =================================================================== -->
+    <section id="section-cuecard" class="hidden space-y-6">
+
+      <!-- Strategy Explanation Banner -->
+      <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm space-y-5 no-print">
+        <div class="flex flex-col lg:flex-row lg:items-start justify-between gap-6">
+          <div class="space-y-2 max-w-3xl">
+            <span class="px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800">Optimal Short-Answer Strategy (No Film Questions)</span>
+            <h2 class="text-2xl font-extrabold text-slate-900">Your 2-Sided 4"×6" Cue Card &amp; Question Selection Plan</h2>
+            <p class="text-sm text-slate-600 leading-relaxed">
+              In Part 4 (2-point short answer, 2× multiplier = 16 pts), you must answer <strong>4 out of 6</strong> questions. By <strong>excluding both film questions (#4 and #5)</strong>, you automatically lock in the exact 4 text-based questions: <strong>#1 (Jung)</strong>, <strong>#2 (Karma/Manusmriti)</strong>, <strong>#3 (Revelation)</strong>, and <strong>#6 (J.S. Mill)</strong>. For Part 5 (triple multiplier = 6 pts), you choose <strong>1 of the 2 MLK questions</strong>.
+            </p>
+          </div>
+
+          <!-- MLK Question Selector -->
+          <div class="bg-indigo-50 border border-indigo-200 rounded-2xl p-4 lg:w-96 shrink-0">
+            <label class="block text-xs font-extrabold uppercase tracking-wider text-indigo-900 mb-2">
+              Step 1: Pick Your 1 MLK Question (Triple Value = 6 pts)
+            </label>
+            <div class="space-y-2">
+              <button type="button" onclick="setMlkChoice('virtues')" id="btn-mlk-virtues" class="w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-bold bg-indigo-600 text-white shadow-xs transition">
+                MLK Q1: Two Cardinal Virtues (Recommended)
+              </button>
+              <button type="button" onclick="setMlkChoice('sowell')" id="btn-mlk-sowell" class="w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-semibold bg-white text-slate-700 border border-indigo-200 hover:bg-indigo-100/50 transition">
+                MLK Q2: Constrained vs. Unconstrained Vision
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Professor Derynck's Strict Cue Card Rules Checklist -->
+        <div class="bg-amber-50/90 border border-amber-200 rounded-2xl p-4">
+          <h3 class="text-xs font-extrabold uppercase tracking-wider text-amber-900 mb-2.5">
+            Mandatory Cue Card Compliance Rules (Avoid Academic Misconduct Penalties!)
+          </h3>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs text-amber-950">
+            <div class="bg-white/90 rounded-xl p-3 border border-amber-200/80">
+              <strong>1. Size &amp; Sides:</strong> Approx. <strong>4" × 6" two-sided</strong> (or 8.5"×11" folded in half, <em>one-sided</em>). Must include your <strong>First &amp; Last Name</strong> and be handed in with the exam.
+            </div>
+            <div class="bg-white/90 rounded-xl p-3 border border-amber-200/80">
+              <strong>2. True Point Form Only:</strong> Few keywords to trigger memory—<strong>NOT</strong> polished answers or complete sentences missing capitals/periods.
+            </div>
+            <div class="bg-white/90 rounded-xl p-3 border border-amber-200/80">
+              <strong>3. 100% Real Quotes:</strong> Every quote below is verified verbatim from the course PDFs. Never put quotation marks around paraphrases.
+            </div>
+            <div class="bg-white/90 rounded-xl p-3 border border-amber-200/80">
+              <strong>4. Strictly 5 Questions:</strong> Only notes for your 4 Set-1 questions + 1 Set-2 MLK question. No MC/TF notes, and keep font readable (Prof has progressive lenses!).
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Interactive Flip Controls & Print/Copy Actions -->
+      <div class="flex flex-wrap items-center justify-between gap-3 no-print">
+        <div class="flex items-center gap-2">
+          <button type="button" onclick="flipCueCard()" class="px-4 py-2.5 rounded-xl bg-slate-900 text-white font-bold text-xs sm:text-sm hover:bg-slate-800 transition flex items-center gap-2 shadow-sm">
+            <span>Flip 3D Card (Front / Back)</span>
+          </button>
+          <span class="text-xs font-bold text-indigo-700 bg-indigo-50 px-3 py-1.5 rounded-xl border border-indigo-200">
+            Click Card to Flip
+          </span>
+        </div>
+
+        <div class="flex flex-wrap gap-2">
+          <button type="button" onclick="copyCueCardText()" class="px-4 py-2.5 rounded-xl bg-white border border-slate-300 text-slate-800 font-semibold text-xs sm:text-sm hover:bg-slate-50 transition">
+            Copy Both Sides Text
+          </button>
+          <button type="button" onclick="window.print()" class="px-4 py-2.5 rounded-xl bg-indigo-600 text-white font-bold text-xs sm:text-sm hover:bg-indigo-700 transition shadow-sm">
+            Print 4"×6" Card Sheet
+          </button>
+        </div>
+      </div>
+
+      <!-- Interactive 3D Flip Card Stage -->
+      <div class="perspective-1000 max-w-3xl mx-auto no-print">
+        <div id="flip-card-inner" class="preserve-3d relative w-full min-h-[450px] cursor-pointer" onclick="flipCueCard()">
+          
+          <!-- FRONT OF CARD (SIDE A: Name + Q1 Jung + Q2 Manusmriti + Q3 Revelation) -->
+          <div class="backface-hidden w-full index-card-paper rounded-2xl border-2 border-slate-300 shadow-lg overflow-hidden">
+            <div class="bg-rose-100/90 border-b-2 border-rose-300 px-5 py-2.5 flex items-center justify-between">
+              <span class="font-mono-card text-xs font-bold text-slate-800">SIDE A (FRONT) • 4" × 6" INDEX CARD</span>
+              <span class="font-mono-card text-xs font-bold text-indigo-950">[YOUR FIRST &amp; LAST NAME]</span>
+            </div>
+            <div class="p-5 font-mono-card text-xs leading-7 text-slate-900 space-y-3.5">
+              <div>
+                <p class="font-bold text-indigo-950 underline">Q1 (Jung: Primitive vs. Civilized)</p>
+                <p>• <strong>Primitive:</strong> live symbols emotionally; connected to unconscious; Mt. Elgon sunrise breath/spittle to <em>mungu</em> (soul substance); <em>"in the beginning was the deed"</em>; unreflective; hampered by fears/taboos/superstitions.</p>
+                <p>• <strong>Civilized:</strong> willpower, efficiency, rationality; act without chanting/prayer; lack introspection; dissociation; possessed by unconscious "gods and demons" as neuroses, pills/alcohol, cancer-phobia prof.</p>
+              </div>
+
+              <div>
+                <p class="font-bold text-indigo-950 underline">Q2 (Karma &amp; Manusmriti Caste)</p>
+                <p>• <strong>Karma:</strong> cosmic moral cause-effect across rebirths (<em>samsara</em>); good deeds/<em>dharma</em> &rarr; higher rebirth; bad deeds &rarr; lower rebirth/animal.</p>
+                <p>• <strong>Manusmriti justification:</strong> 4 <em>varnas</em> (Brahmin, Kshatriya, Vaishya, Shudra) = earned metaphysical consequence of past lives, not arbitrary oppression; obey caste duty (<em>svadharma</em>) for future rebirth.</p>
+              </div>
+
+              <div>
+                <p class="font-bold text-indigo-950 underline">Q3 (Revelation: Assuring Persecuted Christians)</p>
+                <p>• <strong>Rev 7:14–17 (white robes/tribulation):</strong> <em>"And God will wipe away every tear from their eyes."</em></p>
+                <p>• <strong>Rev 14:13:</strong> <em>"Blessed are the dead who die in the Lord from now on."</em></p>
+                <p>• <strong>Rev 20:4–6 (1st resurrection, beheaded martyrs reign 1,000 yrs):</strong> <em>"The second death has no power over them"</em></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- BACK OF CARD (SIDE B: Q6 J.S. Mill + Chosen MLK Question) -->
+          <div class="backface-hidden rotate-y-180 absolute inset-0 w-full index-card-paper rounded-2xl border-2 border-slate-300 shadow-lg overflow-hidden">
+            <div class="bg-sky-100/90 border-b-2 border-sky-300 px-5 py-2.5 flex items-center justify-between">
+              <span class="font-mono-card text-xs font-bold text-slate-800">SIDE B (BACK) • 4" × 6" INDEX CARD</span>
+              <span class="font-mono-card text-xs font-bold text-indigo-950">GNED 1202 — PART 4 (Q6) &amp; PART 5 (MLK)</span>
+            </div>
+            <div class="p-5 font-mono-card text-xs leading-7 text-slate-900 space-y-4">
+              <div>
+                <p class="font-bold text-teal-950 underline">Q6 (J.S. Mill: Unconstrained vs. Constrained)</p>
+                <p>• <strong>Unconstrained:</strong> human nature malleable via education/laws; poverty &amp; disease <em>"conquerable by human care and effort"</em>; morality grounded in human-calculated utility, not fixed divine decree.</p>
+                <p>• <strong>Constrained:</strong> human <em>"infirmity of character"</em> (choosing nearer lower pleasures); imperfect happiness; lack of time/wisdom to calculate every act &rarr; need inherited rules/<em>"secondary principles"</em> (landmarks / Nautical Almanack) &amp; strict veracity.</p>
+              </div>
+
+              <div id="cuecard-mlk-back-content"></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Flat Side-by-Side Printable View -->
+      <div id="printable-cards" class="print-only-card grid grid-cols-1 lg:grid-cols-2 gap-6 pt-4">
+        <div class="card-sheet bg-white rounded-2xl border-2 border-slate-300 p-5 shadow-xs">
+          <div class="flex justify-between items-center border-b-2 border-rose-300 pb-2 mb-3">
+            <span class="text-xs font-extrabold uppercase tracking-wider text-rose-700">Side A (Front) — Print / Hand-Copy Layout</span>
+            <span class="text-xs font-mono-card font-bold text-slate-800">[First &amp; Last Name]</span>
+          </div>
+          <div class="font-mono-card text-xs leading-relaxed text-slate-800 space-y-3">
+            <div>
+              <p class="font-bold text-slate-950">Q1 (Jung: Primitive vs. Civilized)</p>
+              <p>• <strong>Primitive:</strong> live symbols emotionally; connected to unconscious; Mt. Elgon sunrise breath/spittle to <em>mungu</em> (soul substance); <em>"in the beginning was the deed"</em>; unreflective; hampered by fears/taboos/superstitions.</p>
+              <p>• <strong>Civilized:</strong> willpower, efficiency, rationality; act without chanting/prayer; lack introspection; dissociation; possessed by unconscious "gods and demons" as neuroses, pills/alcohol, cancer-phobia prof.</p>
+            </div>
+            <div>
+              <p class="font-bold text-slate-950">Q2 (Karma &amp; Manusmriti Caste)</p>
+              <p>• <strong>Karma:</strong> cosmic moral cause-effect across rebirths (<em>samsara</em>); good deeds/<em>dharma</em> &rarr; higher rebirth; bad deeds &rarr; lower rebirth/animal.</p>
+              <p>• <strong>Manusmriti justification:</strong> 4 <em>varnas</em> (Brahmin, Kshatriya, Vaishya, Shudra) = earned metaphysical consequence of past lives; obey caste duty (<em>svadharma</em>) for future rebirth.</p>
+            </div>
+            <div>
+              <p class="font-bold text-slate-950">Q3 (Revelation: Assuring Persecuted Christians)</p>
+              <p>• <strong>Rev 7:14–17 (white robes/tribulation):</strong> <em>"And God will wipe away every tear from their eyes."</em></p>
+              <p>• <strong>Rev 14:13:</strong> <em>"Blessed are the dead who die in the Lord from now on."</em></p>
+              <p>• <strong>Rev 20:4–6 (1st resurrection, beheaded martyrs reign 1,000 yrs):</strong> <em>"The second death has no power over them"</em></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-sheet bg-white rounded-2xl border-2 border-slate-300 p-5 shadow-xs">
+          <div class="flex justify-between items-center border-b-2 border-sky-300 pb-2 mb-3">
+            <span class="text-xs font-extrabold uppercase tracking-wider text-sky-700">Side B (Back) — Print / Hand-Copy Layout</span>
+            <span class="text-xs font-mono-card font-bold text-slate-800">Q6 + Selected MLK Q</span>
+          </div>
+          <div class="font-mono-card text-xs leading-relaxed text-slate-800 space-y-3">
+            <div>
+              <p class="font-bold text-slate-950">Q6 (J.S. Mill: Unconstrained vs. Constrained)</p>
+              <p>• <strong>Unconstrained:</strong> human nature malleable via education/laws; poverty &amp; disease <em>"conquerable by human care and effort"</em>; morality grounded in human-calculated utility, not fixed divine decree.</p>
+              <p>• <strong>Constrained:</strong> human <em>"infirmity of character"</em> (choosing nearer lower pleasures); imperfect happiness; lack of time/wisdom to calculate every act &rarr; need inherited rules/<em>"secondary principles"</em> (landmarks / Nautical Almanack) &amp; strict veracity.</p>
+            </div>
+            <div id="printable-mlk-slot"></div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
   <script>
-    const field = document.getElementById("field");
-    const floatCount = window.matchMedia("(max-width: 680px)").matches ? 10 : 18;
-    for (let i = 0; i < floatCount; i++) {
-      const el = document.createElement("div");
-      el.className = "float-b";
-      el.textContent = "🍔";
-      el.style.left = Math.random() * 100 + "vw";
-      el.style.fontSize = 16 + Math.random() * 24 + "px";
-      el.style.animationDuration = 14 + Math.random() * 18 + "s";
-      el.style.animationDelay = (-Math.random() * 20) + "s";
-      field.appendChild(el);
+    // =========================================================================
+    // 1. NAVIGATION & TOAST HELPERS
+    // =========================================================================
+    function showToast(msg) {
+      const banner = document.getElementById('toast-banner');
+      const text = document.getElementById('toast-message');
+      text.textContent = msg;
+      banner.classList.remove('hidden');
+      clearTimeout(window._toastTimer);
+      window._toastTimer = setTimeout(function () {
+        banner.classList.add('hidden');
+      }, 3600);
     }
 
-    const burger = document.getElementById("burger");
-    const hit = document.getElementById("hit");
-    const plate = document.getElementById("plate");
-    const tally = document.getElementById("tally");
-    const countEl = document.getElementById("count");
-    const nom = new Audio("https://raw.githubusercontent.com/codelyoon/chezburger/d80834594acfa7a3e0bc9ca0f14a4673825c76bb/mmm-cheezburger.mp3");
-    nom.preload = "auto";
-    function playNom() {
-      nom.currentTime = 0;
-      nom.play().catch(() => {});
+    function switchSection(sectionId) {
+      ['guide', 'practice', 'cuecard'].forEach(function (id) {
+        const el = document.getElementById('section-' + id);
+        const tab = document.getElementById('tab-' + id);
+        if (id === sectionId) {
+          el.classList.remove('hidden');
+          tab.classList.add('bg-indigo-600', 'text-white', 'shadow-xs');
+          tab.classList.remove('text-slate-700', 'hover:bg-white/80');
+        } else {
+          el.classList.add('hidden');
+          tab.classList.remove('bg-indigo-600', 'text-white', 'shadow-xs');
+          tab.classList.add('text-slate-700', 'hover:bg-white/80');
+        }
+      });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    let bites = 0;
-    let finished = 0;
-    let busy = false;
-    let lineN = 0;
+    // =========================================================================
+    // 2. STUDY GUIDE FILTERING, SEARCH, ACCORDIONS & MASTERY TRACKER
+    // =========================================================================
+    function filterTopics(topic, btnEl) {
+      document.querySelectorAll('.topic-pill').forEach(function (btn) {
+        btn.classList.remove('bg-indigo-600', 'text-white', 'shadow-xs');
+        btn.classList.add('bg-slate-100', 'text-slate-700');
+      });
+      if (btnEl) {
+        btnEl.classList.remove('bg-slate-100', 'text-slate-700');
+        btnEl.classList.add('bg-indigo-600', 'text-white', 'shadow-xs');
+      }
 
-    const lines = [
-      "Mmm, Chezburger!",
-      "Launching 2026.",
-      "Idea first. Grill later.",
-      "Easy — that's the mascot.",
-      "Save some for playtesting.",
-      "Classic gear. Wrong context.",
-      "Kitchen's open in 2026.",
-      "Don't eat the whole pipeline.",
-      "If this was a game, you'd have the badge.",
-      "One more and this one's gone.",
-      "Paid in flavor. Ideas pay in Robux.",
-      "Stop snacking. Start pitching."
+      document.querySelectorAll('.topic-card').forEach(function (card) {
+        if (topic === 'all' || card.dataset.topic === topic) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    }
+
+    function searchStudyHub(query) {
+      const q = query.trim().toLowerCase();
+      document.querySelectorAll('.topic-card').forEach(function (card) {
+        if (!q) {
+          card.classList.remove('hidden');
+          return;
+        }
+        const text = card.innerText.toLowerCase();
+        if (text.includes(q)) {
+          card.classList.remove('hidden');
+          card.querySelectorAll('details').forEach(function (d) {
+            d.open = true;
+          });
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    }
+
+    function toggleAllDetails(openState) {
+      document.querySelectorAll('#study-modules-container details').forEach(function (d) {
+        d.open = openState;
+      });
+    }
+
+    function updateMasteryCount() {
+      const checked = document.querySelectorAll('.module-check:checked').length;
+      document.getElementById('mastery-counter').textContent = checked + ' / 7';
+    }
+
+    // =========================================================================
+    // 3. PRACTICE EXAM DATA & INTERACTIVE ENGINE (18 MC + 10 T/F + 12 MATCHING)
+    // =========================================================================
+    const mcQuestions = [
+      {
+        id: 'mc1',
+        topic: 'Jung',
+        q: 'According to Carl Jung in "The Archetype in Dream Symbolism," how are archetypes best defined?',
+        options: [
+          'A) Inherited, fully formed mythological pictures stored in the conscious mind',
+          'B) An inherited, instinctive tendency of the human mind to form representations of mythological motifs that vary in detail while keeping a basic pattern',
+          'C) Personal memories suppressed during childhood trauma that only appear in lucid dreams',
+          'D) Conscious traditions passed down exclusively through written language and formal education'
+        ],
+        answer: 1,
+        explanation: 'Jung explicitly rejects the misconception that archetypes are "inherited ideas" or fixed images; instead, they are an inherited instinctive tendency to form varying representations around a universal motif.'
+      },
+      {
+        id: 'mc2',
+        topic: 'Jung',
+        q: 'What recurring theme did Jung identify in nine of the twelve dreams recorded by the eight-year-old girl for her father?',
+        options: [
+          'A) Romantic longing and preparation for marriage',
+          'B) Destruction and restoration (apocatastasis), serving as an unconscious preparation for death',
+          'C) Ambition to conquer foreign nations',
+          'D) Daily anxieties about schoolwork and parental punishment'
+        ],
+        answer: 1,
+        explanation: 'Nine of the twelve dreams center on destruction and restoration (apocatastasis), which Jung interpreted as an anticipatory shadow (adumbratio) preparing the child for her fatal illness a year later.'
+      },
+      {
+        id: 'mc3',
+        topic: 'Jung',
+        q: 'When Jung observed the primitives on Mount Elgon breathing or spitting into their hands at sunrise toward "mungu," what did he conclude?',
+        options: [
+          'A) They had forgotten an ancient scientific astronomy lesson',
+          'B) They lived their symbols emotionally without conscious reflection, offering their "soul substance" without being able to explain why',
+          'C) They worshiped the physical sun disk at noon as a king',
+          'D) They performed the ritual solely out of fear of their tribal chief'
+        ],
+        answer: 1,
+        explanation: 'Jung cites Faust ("In the beginning was the deed") to show that primitives live their symbols rather than reflect upon them; breath and spittle represent "soul substance" offered at the moment of sunrise.'
+      },
+      {
+        id: 'mc4',
+        topic: 'Manusmriti & Leviticus',
+        q: 'According to Professor Derynck’s study guide and video commentary, how do Leviticus and the Manusmriti compare regarding sexuality?',
+        options: [
+          'A) Both texts praise same-sex relationships equally',
+          'B) Both texts are completely silent on sexuality and gender roles',
+          'C) Both are problematic, yet differ in specifics—for instance, one condemns lesbianism whereas Leviticus does not even acknowledge that lesbians exist',
+          'D) Leviticus establishes the four-caste varna system while Manusmriti abolishes it'
+        ],
+        answer: 2,
+        explanation: 'Prof Derynck specifically notes in the study guide and video that while both texts have problematic views on women and sexuality, they diverge in specifics (such as lesbianism being addressed in one and unacknowledged in the other).'
+      },
+      {
+        id: 'mc5',
+        topic: 'Manusmriti',
+        q: 'In the Manusmriti, how do the three gunas (sattva, rajas, tamas) apply to dietary rules?',
+        options: [
+          'A) They determine which days of the week merchants may trade',
+          'B) They classify food purity and its spiritual/mental effects—sattva (purity/goodness), rajas (passion/activity), and tamas (darkness/impurity)',
+          'C) They name the three rivers surrounding Mount Zion',
+          'D) They represent the three stages of Joseph Campbell’s Hero’s Journey'
+        ],
+        answer: 1,
+        explanation: 'The study guide highlights how sattva, rajas, and tamas categorize food purity and the qualities those foods cultivate in the consumer.'
+      },
+      {
+        id: 'mc6',
+        topic: 'Revelation',
+        q: 'Which two of the Seven Churches in Revelation receive NO blame or rebuke from Christ?',
+        options: [
+          'A) Ephesus and Laodicea',
+          'B) Pergamum and Thyatira',
+          'C) Smyrna and Philadelphia',
+          'D) Sardis and Ephesus'
+        ],
+        answer: 2,
+        explanation: 'In Revelation 2–3, Smyrna (persecuted, poor yet rich, faithful unto death) and Philadelphia (little strength, kept Christ’s word, given an open door) are the only two churches praised without condemnation.'
+      },
+      {
+        id: 'mc7',
+        topic: 'Revelation',
+        q: 'Why does Christ threaten to spit the church in Laodicea out of his mouth in Revelation 3?',
+        options: [
+          'A) Because they tolerated the false prophetess Jezebel',
+          'B) Because they are "lukewarm—neither hot nor cold," self-satisfied with material wealth while spiritually wretched, poor, blind, and naked',
+          'C) Because they persecuted the apostle John on Patmos',
+          'D) Because they refused to pay taxes to Rome'
+        ],
+        answer: 1,
+        explanation: 'Revelation 3:15–17 condemns Laodicea for being lukewarm and boasting "I am rich; I have acquired wealth and do not need a thing" while actually being wretched, pitiful, poor, blind, and naked.'
+      },
+      {
+        id: 'mc8',
+        topic: 'Revelation',
+        q: 'In Revelation 13, how is the second beast (the beast coming out of the earth / false prophet) described?',
+        options: [
+          'A) It has seven heads and ten crowns rising out of the sea',
+          'B) It has two horns like a lamb, but speaks like a dragon, performs deceptive signs, and enforces the mark of the beast (666)',
+          'C) It is clothed with the sun with a crown of twelve stars',
+          'D) It rides a white horse with eyes like blazing fire and a double-edged sword'
+        ],
+        answer: 1,
+        explanation: 'Revelation 13:11–18 describes the beast from the earth as having two horns like a lamb while speaking like a dragon, forcing people to worship the first beast’s image and take the mark 666.'
+      },
+      {
+        id: 'mc9',
+        topic: 'Revelation',
+        q: 'How is Christ portrayed in John’s opening vision in Revelation 1 among the seven golden lampstands?',
+        options: [
+          'A) As a humble carpenter wearing sandals and carrying a wooden cross',
+          'B) With hair white like wool, eyes like blazing fire, feet like glowing bronze, seven stars in his right hand, and a sharp double-edged sword coming from his mouth',
+          'C) As a scarlet beast with ten horns and blasphemous names',
+          'D) As a silent angel holding a measuring rod of reed'
+        ],
+        answer: 1,
+        explanation: 'Revelation 1:13–16 depicts the Son of Man with white hair, blazing fire eyes, glowing bronze feet, a voice like rushing waters, seven stars in his right hand, and a double-edged sword coming from his mouth.'
+      },
+      {
+        id: 'mc10',
+        topic: 'MLK Speeches',
+        q: 'What are the exact titles of the two Martin Luther King Jr. speeches included in the course reading pack?',
+        options: [
+          'A) "Letter from Birmingham Jail" and "Beyond Vietnam"',
+          'B) "I Have a Dream" and "Paul’s Letter to American Christians"',
+          'C) "The Drum Major Instinct" and "I’ve Been to the Mountaintop"',
+          'D) "Strength to Love" and "Stride Toward Freedom"'
+        ],
+        answer: 1,
+        explanation: 'As Professor Derynck highlights in the study guide, knowing the two speech titles—"I Have a Dream" (1963) and "Paul’s Letter to American Christians" (1958)—guarantees the MLK multiple-choice point.'
+      },
+      {
+        id: 'mc11',
+        topic: 'J.S. Mill',
+        q: 'How does J.S. Mill distinguish between higher and lower pleasures in Chapter II of "Utilitarianism"?',
+        options: [
+          'A) Higher pleasures are always longer in duration and cheaper to purchase',
+          'B) Higher pleasures are preferred in quality by competent judges who have experienced both, even if accompanied by greater discontent ("better to be Socrates dissatisfied than a fool satisfied")',
+          'C) Higher pleasures are strictly physical sensations approved by the majority',
+          'D) Higher pleasures require total renunciation of all happiness'
+        ],
+        answer: 1,
+        explanation: 'Mill argues that pleasures differ in quality as well as quantity, and those competently acquainted with both decisively prefer pleasures engaging higher intellectual and moral faculties.'
+      },
+      {
+        id: 'mc12',
+        topic: 'J.S. Mill',
+        q: 'What is J.S. Mill’s view on self-sacrifice in "Utilitarianism"?',
+        options: [
+          'A) Self-sacrifice is an intrinsic good in itself, regardless of its consequences',
+          'B) Self-sacrifice is always irrational and contrary to utility',
+          'C) Readiness for self-sacrifice is the highest virtue ONLY when it increases the total happiness of others; sacrifice that produces no good for anyone is wasted',
+          'D) Only religious ascetics on pillars practice true utilitarian sacrifice'
+        ],
+        answer: 2,
+        explanation: 'Mill states that utilitarianism applauds self-renunciation solely when devoted to the happiness of others; sacrifice for its own sake is wasted and no better than an ascetic mounted on a pillar.'
+      },
+      {
+        id: 'mc13',
+        topic: 'J.S. Mill',
+        q: 'How does Mill respond to the objection that people do not have time before every action to calculate its effects on general happiness?',
+        options: [
+          'A) People must pause for an hour before making any moral decision',
+          'B) Humanity has had the whole past duration of the species to learn the tendencies of actions, establishing "secondary principles" (like landmarks or a sailor’s Nautical Almanack)',
+          'C) Calculation is unnecessary because any immediate expedient act is morally right',
+          'D) Only government officials are permitted to make moral choices'
+        ],
+        answer: 1,
+        explanation: 'Mill compares secondary moral rules to direction-posts and a sailor’s Nautical Almanack—humanity has already calculated general tendencies through historical experience.'
+      },
+      {
+        id: 'mc14',
+        topic: 'J.S. Mill',
+        q: 'In "Utilitarianism," why does Mill condemn telling a lie for momentary personal convenience ("expediency")?',
+        options: [
+          'A) Because lying is forbidden by ancient Roman law',
+          'B) Because even a small deviation from truth weakens human trustworthiness, upon which civilization and long-term human happiness depend',
+          'C) Because lying always causes immediate physical pain to the speaker',
+          'D) Because Mill admits no possible exceptions to truthfulness under any circumstances'
+        ],
+        answer: 1,
+        explanation: 'Mill distinguishes short-term "expediency" from true long-term utility: weakening reliance on human veracity harms civilization on the largest scale (though he allows rare, strictly bounded exceptions such as withholding fatal news from a dangerously ill person).'
+      },
+      {
+        id: 'mc15',
+        topic: 'The Lathe of Heaven',
+        q: 'In Ursula K. Le Guin’s "The Lathe of Heaven," what triggers the alien invasion?',
+        options: [
+          'A) George Orr dreams of traveling to a distant galaxy',
+          'B) Dr. Haber instructs George to dream of "peace on Earth," which causes humanity to unite against invading extraterrestrials',
+          'C) Heather Lelache files a lawsuit against the United Nations',
+          'D) A nuclear war destroys the moon base'
+        ],
+        answer: 1,
+        explanation: 'When Haber commands George to dream of peace on Earth, George’s unconscious resolves human conflict by introducing an external alien invasion that forces humanity to unite.'
+      },
+      {
+        id: 'mc16',
+        topic: 'The Lathe of Heaven',
+        q: 'Which sections of "The Lathe of Heaven" does Professor Derynck specifically remind students not to overlook on Midterm 2?',
+        options: [
+          'A) Only Chapters 1 and 2',
+          'B) The tail end of Chapter 5, plus Chapters 6–9 (including Ch. 7 revelations about Lelache & original reality, the aliens, and Ch. 9’s drastic changes)',
+          'C) Only the author’s preface',
+          'D) The novel is not tested on Midterm 2'
+        ],
+        answer: 1,
+        explanation: 'The study guide explicitly warns: "Don’t forget that the tail end of Ch 5 is on this exam!" along with Haber’s interventions, Ch. 7’s revelations about Lelache and original reality, the aliens, and Ch. 9.'
+      },
+      {
+        id: 'mc17',
+        topic: 'Films (MC/TF Context)',
+        q: 'According to Professor Derynck’s study guide, what framework is used on MC and T/F questions to analyze both "Idiocracy" and "Snowpiercer"?',
+        options: [
+          'A) Mill’s Greatest Happiness Principle',
+          'B) The Hero’s Journey stages',
+          'C) The Seven Churches of Asia Minor',
+          'D) The five mahapatakas of the Manusmriti'
+        ],
+        answer: 1,
+        explanation: 'The study guide states directly: "Multiple choice and true/false on these films both refer to the hero’s journey."'
+      },
+      {
+        id: 'mc18',
+        topic: 'J.S. Mill',
+        q: 'What role does Mill assign to education and social arrangements in achieving the utilitarian ideal?',
+        options: [
+          'A) Education should train citizens to ignore the suffering of strangers',
+          'B) Education and opinion should establish in every mind an indissoluble association between one’s own happiness and the good of the whole',
+          'C) Education is irrelevant because mental cultivation causes unhappiness',
+          'D) Social arrangements should eliminate all excitement in favor of pure passivity'
+        ],
+        answer: 1,
+        explanation: 'Mill argues that laws and education should harmonize individual interest with the general interest so each person associates their own happiness with promoting the universal good.'
+      }
     ];
 
-    function crumbs() {
-      for (let i = 0; i < 5; i++) {
-        const c = document.createElement("div");
-        c.className = "crumb";
-        c.textContent = ["🍔","🧀","🥬","🍅"][i % 4];
-        c.style.left = 55 + Math.random() * 25 + "%";
-        c.style.top = "16%";
-        c.style.setProperty("--x", (16 + Math.random() * 80) + "px");
-        c.style.setProperty("--y", (-28 - Math.random() * 70) + "px");
-        plate.appendChild(c);
-        setTimeout(() => c.remove(), 700);
+    const tfQuestions = [
+      {
+        id: 'tf1',
+        topic: 'Exam Format',
+        q: 'On Midterm 2, if you answer all 18 Multiple Choice questions instead of 16, Professor Derynck will grade all 18 and drop your two lowest scores.',
+        answer: false,
+        explanation: 'FALSE! In the video transcript, Prof Derynck explicitly warns he only grades the first 16 he sees—answering extra questions wastes marks if earlier ones are wrong.'
+      },
+      {
+        id: 'tf2',
+        topic: 'Jung',
+        q: 'Jung argues that modern "civilized" people have completely eliminated the unconscious gods and demons that used to possess primitive peoples.',
+        answer: false,
+        explanation: 'FALSE! Jung states that the gods and demons have not disappeared at all—they merely have new names and keep modern man on the run with neuroses, restlessness, pills, alcohol, and irrational phobias.'
+      },
+      {
+        id: 'tf3',
+        topic: 'Jung',
+        q: 'In the 8-year-old girl’s second dream, ascending to heaven where pagan dances occur and descending to hell where angels do good deeds illustrates a "relativization of moral values."',
+        answer: true,
+        explanation: 'TRUE! Jung notes this exact motif in Dream 2 as an astonishing reversal and relativization of conventional moral values.'
+      },
+      {
+        id: 'tf4',
+        topic: 'Revelation',
+        q: 'In Revelation 17–18, "Babylon the Great" is depicted as a modest, impoverished widow persecuted by the kings of the earth.',
+        answer: false,
+        explanation: 'FALSE! Babylon the Great is depicted as the "great prostitute" dressed in purple, scarlet, gold, and pearls, riding the scarlet beast, boasting "I sit enthroned as queen. I am not a widow," and drunk with the blood of saints.'
+      },
+      {
+        id: 'tf5',
+        topic: 'Revelation',
+        q: 'In Revelation 20, the "first resurrection" belongs specifically to those who were beheaded for their testimony about Jesus and refused the beast’s mark, allowing them to reign with Christ for 1,000 years.',
+        answer: true,
+        explanation: 'TRUE! Revelation 20:4–6 describes this first resurrection of the martyrs, declaring that "The second death has no power over them."'
+      },
+      {
+        id: 'tf6',
+        topic: 'J.S. Mill',
+        q: 'According to Mill, the utilitarian standard of right conduct is the agent’s own greatest personal happiness.',
+        answer: false,
+        explanation: 'FALSE! Mill repeatedly emphasizes that the standard is NOT the agent’s own greatest happiness, but the greatest amount of happiness altogether—requiring impartiality like a "disinterested and benevolent spectator."'
+      },
+      {
+        id: 'tf7',
+        topic: 'J.S. Mill',
+        q: 'Mill argues that a person’s motive determines whether an action is morally right or wrong.',
+        answer: false,
+        explanation: 'FALSE! Mill states that "the motive has nothing to do with the morality of the action, though much with the worth of the agent" (e.g., saving someone from drowning is morally right regardless of whether the motive is duty or hope of payment).'
+      },
+      {
+        id: 'tf8',
+        topic: 'Manusmriti & Leviticus',
+        q: 'More multiple-choice and true/false questions on Midterm 2 focus on the Manusmriti than on Leviticus, though some questions compare their similarities and differences.',
+        answer: true,
+        explanation: 'TRUE! Both the study guide and video transcript confirm there is greater emphasis on Manu while testing parallels and divergences with Leviticus.'
+      },
+      {
+        id: 'tf9',
+        topic: 'MLK Speeches',
+        q: 'In "Paul’s Letter to American Christians," Martin Luther King Jr. argues that Christians owe their ultimate allegiance to majority public opinion and national laws whenever they conflict with God’s will.',
+        answer: false,
+        explanation: 'FALSE! King (speaking as Paul) condemns discovering right by taking a "Gallup Poll of the majority opinion," reminding Christians they are a "colony of heaven" whose ultimate allegiance is to God over man-made institutions.'
+      },
+      {
+        id: 'tf10',
+        topic: 'The Lathe of Heaven',
+        q: 'In "The Lathe of Heaven," Dr. Haber’s dream-induced fixes consistently resolve world problems cleanly without creating unintended side effects.',
+        answer: false,
+        explanation: 'FALSE! Every attempt Haber makes to "fix" the world through George’s effective dreams produces catastrophic, ironic unintended consequences.'
       }
-    }
+    ];
 
-    function showToast(msg) {
-      const t = document.getElementById("toast");
-      t.textContent = msg;
-      t.classList.add("show");
-      setTimeout(() => t.classList.remove("show"), 1700);
-    }
-
-    function resetBurger() {
-      bites = 0;
-      burger.className = "stack drop-in";
-    }
-
-    function chomp() {
-      if (busy) return;
-      busy = true;
-      bites++;
-      burger.classList.remove("chomp");
-      void burger.offsetWidth;
-      burger.classList.add("chomp");
-      crumbs();
-      if (navigator.vibrate) navigator.vibrate(10);
-      showToast(lines[lineN % lines.length]);
-      lineN++;
-
-      if (bites === 1) {
-        burger.classList.add("b1");
-        setTimeout(() => { busy = false; }, 260);
-      } else if (bites === 2) {
-        burger.classList.remove("b1");
-        burger.classList.add("b2");
-        setTimeout(() => { busy = false; }, 260);
-      } else {
-        burger.classList.remove("b1","b2");
-        burger.classList.add("eaten");
-        finished++;
-        countEl.textContent = finished;
-        if (finished >= 3) tally.classList.add("on");
-        playNom();
-        setTimeout(() => {
-          resetBurger();
-          busy = false;
-        }, 340);
+    const jungMatchingItems = [
+      {
+        id: 'm1',
+        term: '1. Compensation',
+        definition: 'The hypothesis that dreams are normal psychic phenomena that transmit unconscious reactions or spontaneous impulses to balance one-sided or faulty conscious attitudes.'
+      },
+      {
+        id: 'm2',
+        term: '2. Circumambulation',
+        definition: 'Examining all aspects of a dream-image with the help of the dreamer’s own personal associative material and context.'
+      },
+      {
+        id: 'm3',
+        term: '3. Archaic remnants / Primordial images',
+        definition: 'Aboriginal, innate, and inherited patterns of the human mind in highly emotional or recurrent dreams that cannot be derived from individual personal experience.'
+      },
+      {
+        id: 'm4',
+        term: '4. Archetype',
+        definition: 'From Greek arche ("origin") and tupos ("imprint"); an inherited instinctive tendency of the human mind to form representations of mythological motifs that vary in detail while keeping a basic pattern.'
+      },
+      {
+        id: 'm5',
+        term: '5. Représentations collectives (Collective representations)',
+        definition: 'Universal mythological motifs and social complexes found practically everywhere across cultures without known historical transmission or migration.'
+      },
+      {
+        id: 'm6',
+        term: '6. Apocatastasis (Restitution)',
+        definition: 'The mythical and theological motif (seen in 9 of the 8-year-old girl’s dreams) that after destruction, everything is restored by the Redeemer to its original, perfect state.'
+      },
+      {
+        id: 'm7',
+        term: '7. Quaternity',
+        definition: 'A fourfold divine totality or cosmic structure (such as God coming from the "four corners" as four gods), contrasted with the Christian Trinity.'
+      },
+      {
+        id: 'm8',
+        term: '8. Adumbratio',
+        definition: 'An anticipatory shadow cast ahead over a person’s life and dreams by an approaching fatal event or death.'
+      },
+      {
+        id: 'm9',
+        term: '9. Tabula rasa',
+        definition: 'The erroneous idea—which arises if one equates the psyche solely with consciousness—that the mind is completely empty at birth and contains only individual conscious learning.'
+      },
+      {
+        id: 'm10',
+        term: '10. Prognostication / Precognition',
+        definition: 'The anticipatory function of dreams perceiving subliminal facts and intuiting an ultimate outcome (such as a fatal fever) poetically before the conscious mind knows it.'
+      },
+      {
+        id: 'm11',
+        term: '11. Numinosity',
+        definition: 'The peculiar emotional fascination, awe, or spell emanating from archetypes and sacred rituals that grips participants and shapes myths and religions.'
+      },
+      {
+        id: 'm12',
+        term: '12. Mana / Mungu',
+        definition: 'An all-pervading divine power or sacred efficacy of extraordinary potency, experienced by Mount Elgon tribesmen in the actual moment of sunrise.'
       }
+    ];
+
+    const userSelections = {};
+    const userMatching = {};
+    let shuffledMatchingDefs = [];
+    let examGraded = false;
+
+    function initMatchingSection() {
+      const copy = jungMatchingItems.slice();
+      for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        const temp = copy[i];
+        copy[i] = copy[j];
+        copy[j] = temp;
+      }
+      const letters = 'ABCDEFGHIJKL'.split('');
+      shuffledMatchingDefs = copy.map(function (item, idx) {
+        return {
+          letter: letters[idx],
+          sourceId: item.id,
+          definition: item.definition
+        };
+      });
+      renderMatchingUI();
     }
 
-    hit.addEventListener("click", chomp);
-    hit.addEventListener("keydown", (e) => {
-      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); chomp(); }
-    });
+    function renderMatchingUI() {
+      const termsContainer = document.getElementById('matching-terms-container');
+      termsContainer.innerHTML = '';
 
-    const form = document.getElementById("idea-form");
-    const btn = document.getElementById("send-btn");
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      btn.disabled = true;
-      try {
-        const res = await fetch(form.action, {
-          method: "POST",
-          body: new FormData(form),
-          headers: { Accept: "application/json" }
+      jungMatchingItems.forEach(function (item) {
+        const chosenLetter = userMatching[item.id] || '';
+        const row = document.createElement('div');
+        row.id = 'match-row-' + item.id;
+        row.className = 'p-3.5 sm:px-4 transition-colors';
+
+        const topFlex = document.createElement('div');
+        topFlex.className = 'flex flex-col sm:flex-row sm:items-center justify-between gap-2.5';
+
+        const label = document.createElement('div');
+        label.className = 'font-bold text-xs sm:text-sm text-slate-900';
+        label.textContent = item.term;
+
+        const select = document.createElement('select');
+        select.id = 'select-' + item.id;
+        select.className = 'w-full sm:w-60 px-3 py-2 rounded-xl border border-slate-300 bg-slate-50 text-xs font-bold text-slate-800 focus:bg-white focus:outline-none focus:ring-2 focus:ring-cyan-500';
+        select.addEventListener('change', function () {
+          selectMatch(item.id, select.value);
         });
-        if (!res.ok) throw new Error("send failed");
-        form.reset();
-        showToast("sent. we'll take a look.");
-      } catch (err) {
-        showToast("didn't go through. try again.");
-      } finally {
-        btn.disabled = false;
-      }
-    });
 
-    const terms = document.getElementById("terms");
-    document.getElementById("terms-open").addEventListener("click", () => {
-      terms.classList.add("open");
-    });
-    document.getElementById("terms-close").addEventListener("click", () => {
-      terms.classList.remove("open");
-    });
-    terms.addEventListener("click", (e) => {
-      if (e.target === terms) terms.classList.remove("open");
-    });
+        const defaultOpt = document.createElement('option');
+        defaultOpt.value = '';
+        defaultOpt.textContent = '-- Choose Letter (A–L) --';
+        select.appendChild(defaultOpt);
+
+        shuffledMatchingDefs.forEach(function (d) {
+          const opt = document.createElement('option');
+          opt.value = d.letter;
+          opt.textContent = d.letter + ' — ' + d.definition.slice(0, 38) + '...';
+          if (chosenLetter === d.letter) {
+            opt.selected = true;
+          }
+          select.appendChild(opt);
+        });
+
+        topFlex.appendChild(label);
+        topFlex.appendChild(select);
+        row.appendChild(topFlex);
+
+        const expDiv = document.createElement('div');
+        expDiv.id = 'match-exp-' + item.id;
+        expDiv.className = 'hidden mt-2 p-2.5 rounded-xl text-xs leading-relaxed';
+        row.appendChild(expDiv);
+
+        termsContainer.appendChild(row);
+      });
+
+      updateMatchingBankAndStatus();
+    }
+
+    function selectMatch(termId, letter) {
+      if (examGraded) {
+        showToast('Click "Reset & Retake Test" to change matching answers.');
+        renderMatchingUI();
+        return;
+      }
+      if (!letter) {
+        delete userMatching[termId];
+      } else {
+        userMatching[termId] = letter;
+      }
+      updateMatchingBankAndStatus();
+    }
+
+    function updateMatchingBankAndStatus() {
+      const bankContainer = document.getElementById('matching-definitions-bank');
+      bankContainer.innerHTML = '';
+
+      const usedLetters = Object.values(userMatching);
+      const letterCounts = {};
+      usedLetters.forEach(function (l) {
+        letterCounts[l] = (letterCounts[l] || 0) + 1;
+      });
+
+      const hasDuplicates = Object.values(letterCounts).some(function (c) {
+        return c > 1;
+      });
+      const dupBanner = document.getElementById('matching-duplicate-warning');
+      if (hasDuplicates) {
+        dupBanner.classList.remove('hidden');
+      } else {
+        dupBanner.classList.add('hidden');
+      }
+
+      shuffledMatchingDefs.forEach(function (d) {
+        const count = letterCounts[d.letter] || 0;
+        let badgeStyle = 'bg-slate-100 text-slate-700 border-slate-200';
+        let rowStyle = 'bg-white';
+        if (count === 1) {
+          badgeStyle = 'bg-emerald-600 text-white border-emerald-600';
+          rowStyle = 'bg-emerald-50/50 rounded-xl';
+        } else if (count > 1) {
+          badgeStyle = 'bg-amber-500 text-white border-amber-500';
+          rowStyle = 'bg-amber-50 rounded-xl';
+        }
+
+        const entry = document.createElement('div');
+        entry.className = 'p-2.5 ' + rowStyle + ' flex items-start gap-2.5 transition';
+
+        const badge = document.createElement('span');
+        badge.className = 'w-6 h-6 rounded-lg border ' + badgeStyle + ' font-extrabold flex items-center justify-center shrink-0 text-xs';
+        badge.textContent = d.letter;
+
+        const desc = document.createElement('p');
+        desc.className = 'text-slate-700 leading-relaxed';
+        desc.textContent = d.definition;
+
+        entry.appendChild(badge);
+        entry.appendChild(desc);
+        bankContainer.appendChild(entry);
+      });
+
+      updateCounters();
+    }
+
+    function renderPracticeQuestions() {
+      const mcContainer = document.getElementById('mc-questions-container');
+      const tfContainer = document.getElementById('tf-questions-container');
+      mcContainer.innerHTML = '';
+      tfContainer.innerHTML = '';
+
+      mcQuestions.forEach(function (item, idx) {
+        const card = document.createElement('div');
+        card.id = 'card-' + item.id;
+        card.className = 'bg-white rounded-2xl p-5 border border-slate-200 shadow-xs flex flex-col justify-between transition-all';
+
+        const top = document.createElement('div');
+        const header = document.createElement('div');
+        header.className = 'flex items-center justify-between gap-2 mb-2.5';
+
+        const tag = document.createElement('span');
+        tag.className = 'text-xs font-extrabold text-indigo-700 bg-indigo-50 px-2.5 py-1 rounded-lg';
+        tag.textContent = 'MC #' + (idx + 1) + ' • ' + item.topic;
+
+        const status = document.createElement('span');
+        status.id = 'status-' + item.id;
+        status.className = 'text-xs font-semibold text-slate-400';
+        status.textContent = 'Skipped / Unanswered';
+
+        header.appendChild(tag);
+        header.appendChild(status);
+        top.appendChild(header);
+
+        const qText = document.createElement('p');
+        qText.className = 'text-sm font-bold text-slate-900 mb-3 leading-snug';
+        qText.textContent = item.q;
+        top.appendChild(qText);
+
+        const optsWrap = document.createElement('div');
+        optsWrap.className = 'space-y-2';
+
+        item.options.forEach(function (optText, oIdx) {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.id = 'opt-' + item.id + '-' + oIdx;
+          btn.className = 'opt-btn-' + item.id + ' w-full text-left px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm text-slate-700 hover:bg-slate-50 transition';
+          btn.textContent = optText;
+          btn.addEventListener('click', function () {
+            selectOption(item.id, oIdx, 'mc');
+          });
+          optsWrap.appendChild(btn);
+        });
+
+        top.appendChild(optsWrap);
+        card.appendChild(top);
+
+        const exp = document.createElement('div');
+        exp.id = 'exp-' + item.id;
+        exp.className = 'hidden mt-3 p-3 rounded-xl text-xs leading-relaxed';
+        card.appendChild(exp);
+
+        mcContainer.appendChild(card);
+      });
+
+      tfQuestions.forEach(function (item, idx) {
+        const card = document.createElement('div');
+        card.id = 'card-' + item.id;
+        card.className = 'bg-white rounded-2xl p-5 border border-slate-200 shadow-xs flex flex-col justify-between transition-all';
+
+        const top = document.createElement('div');
+        const header = document.createElement('div');
+        header.className = 'flex items-center justify-between gap-2 mb-2.5';
+
+        const tag = document.createElement('span');
+        tag.className = 'text-xs font-extrabold text-purple-700 bg-purple-50 px-2.5 py-1 rounded-lg';
+        tag.textContent = 'T/F #' + (idx + 1) + ' • ' + item.topic;
+
+        const status = document.createElement('span');
+        status.id = 'status-' + item.id;
+        status.className = 'text-xs font-semibold text-slate-400';
+        status.textContent = 'Skipped / Unanswered';
+
+        header.appendChild(tag);
+        header.appendChild(status);
+        top.appendChild(header);
+
+        const qText = document.createElement('p');
+        qText.className = 'text-sm font-bold text-slate-900 mb-3 leading-snug';
+        qText.textContent = item.q;
+        top.appendChild(qText);
+
+        const grid = document.createElement('div');
+        grid.className = 'grid grid-cols-2 gap-3';
+
+        [true, false].forEach(function (boolVal) {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.id = 'opt-' + item.id + '-' + boolVal;
+          btn.className = 'opt-btn-' + item.id + ' py-2.5 px-4 rounded-xl border border-slate-200 text-sm font-bold text-slate-700 hover:bg-slate-50 transition text-center';
+          btn.textContent = boolVal ? 'TRUE (T)' : 'FALSE (F)';
+          btn.addEventListener('click', function () {
+            selectOption(item.id, boolVal, 'tf');
+          });
+          grid.appendChild(btn);
+        });
+
+        top.appendChild(grid);
+        card.appendChild(top);
+
+        const exp = document.createElement('div');
+        exp.id = 'exp-' + item.id;
+        exp.className = 'hidden mt-3 p-3 rounded-xl text-xs leading-relaxed';
+        card.appendChild(exp);
+
+        tfContainer.appendChild(card);
+      });
+    }
+
+    function selectOption(qId, val, type) {
+      if (examGraded) {
+        showToast('Click "Reset & Retake Test" to change answers.');
+        return;
+      }
+
+      if (userSelections[qId] === val) {
+        delete userSelections[qId];
+      } else {
+        const currentMcCount = mcQuestions.filter(function (q) {
+          return userSelections[q.id] !== undefined;
+        }).length;
+        const currentTfCount = tfQuestions.filter(function (q) {
+          return userSelections[q.id] !== undefined;
+        }).length;
+
+        if (userSelections[qId] === undefined) {
+          if (type === 'mc' && currentMcCount >= 16) {
+            showToast('Midterm Rule: You already selected 16 MC questions! Unselect one first to swap.');
+            return;
+          }
+          if (type === 'tf' && currentTfCount >= 8) {
+            showToast('Midterm Rule: You already selected 8 T/F questions! Unselect one first to swap.');
+            return;
+          }
+        }
+        userSelections[qId] = val;
+      }
+
+      updateSelectionUI(qId);
+      updateCounters();
+    }
+
+    function updateSelectionUI(qId) {
+      const statusEl = document.getElementById('status-' + qId);
+      const selected = userSelections[qId];
+
+      document.querySelectorAll('.opt-btn-' + qId).forEach(function (btn) {
+        btn.classList.remove('bg-indigo-600', 'text-white', 'border-indigo-600', 'font-semibold');
+        btn.classList.add('border-slate-200', 'text-slate-700');
+      });
+
+      if (selected !== undefined) {
+        const targetBtn = document.getElementById('opt-' + qId + '-' + selected);
+        if (targetBtn) {
+          targetBtn.classList.remove('border-slate-200', 'text-slate-700');
+          targetBtn.classList.add('bg-indigo-600', 'text-white', 'border-indigo-600', 'font-semibold');
+        }
+        statusEl.textContent = 'Selected';
+        statusEl.className = 'text-xs font-bold text-indigo-600';
+      } else {
+        statusEl.textContent = 'Skipped / Unanswered';
+        statusEl.className = 'text-xs font-semibold text-slate-400';
+      }
+    }
+
+    function updateCounters() {
+      const mcCount = mcQuestions.filter(function (q) {
+        return userSelections[q.id] !== undefined;
+      }).length;
+      const tfCount = tfQuestions.filter(function (q) {
+        return userSelections[q.id] !== undefined;
+      }).length;
+      const matchCount = jungMatchingItems.filter(function (m) {
+        return userMatching[m.id] !== undefined;
+      }).length;
+      document.getElementById('mc-count-badge').textContent = mcCount + ' / 16';
+      document.getElementById('tf-count-badge').textContent = tfCount + ' / 8';
+      document.getElementById('match-count-badge').textContent = matchCount + ' / 12';
+    }
+
+    function gradePracticeExam() {
+      const mcAnswered = mcQuestions.filter(function (q) {
+        return userSelections[q.id] !== undefined;
+      });
+      const tfAnswered = tfQuestions.filter(function (q) {
+        return userSelections[q.id] !== undefined;
+      });
+      const matchAnswered = jungMatchingItems.filter(function (m) {
+        return userMatching[m.id] !== undefined;
+      });
+
+      if (mcAnswered.length === 0 && tfAnswered.length === 0 && matchAnswered.length === 0) {
+        showToast('Select some questions or matching terms first before grading!');
+        return;
+      }
+
+      examGraded = true;
+      let mcCorrect = 0;
+      let tfCorrect = 0;
+      let matchRawCorrect = 0;
+
+      mcQuestions.forEach(function (item) {
+        const chosen = userSelections[item.id];
+        const expEl = document.getElementById('exp-' + item.id);
+        const cardEl = document.getElementById('card-' + item.id);
+        expEl.classList.remove('hidden');
+
+        const correctBtn = document.getElementById('opt-' + item.id + '-' + item.answer);
+        correctBtn.classList.remove('border-slate-200', 'text-slate-700', 'bg-indigo-600');
+        correctBtn.classList.add('bg-emerald-600', 'text-white', 'border-emerald-600', 'font-bold');
+
+        if (chosen === undefined) {
+          cardEl.classList.add('opacity-80');
+          expEl.className = 'mt-3 p-3 rounded-xl text-xs leading-relaxed bg-slate-100 text-slate-700 border border-slate-200';
+          expEl.innerHTML = '<strong>Skipped:</strong> ' + item.explanation;
+        } else if (chosen === item.answer) {
+          mcCorrect++;
+          cardEl.classList.add('border-emerald-400');
+          expEl.className = 'mt-3 p-3 rounded-xl text-xs leading-relaxed bg-emerald-50 text-emerald-950 border border-emerald-200';
+          expEl.innerHTML = '<strong>Correct (+1)!</strong> ' + item.explanation;
+        } else {
+          const wrongBtn = document.getElementById('opt-' + item.id + '-' + chosen);
+          wrongBtn.classList.remove('bg-indigo-600', 'border-indigo-600');
+          wrongBtn.classList.add('bg-rose-600', 'text-white', 'border-rose-600');
+          cardEl.classList.add('border-rose-400');
+          expEl.className = 'mt-3 p-3 rounded-xl text-xs leading-relaxed bg-rose-50 text-rose-950 border border-rose-200';
+          expEl.innerHTML = '<strong>Incorrect (0):</strong> ' + item.explanation;
+        }
+      });
+
+      tfQuestions.forEach(function (item) {
+        const chosen = userSelections[item.id];
+        const expEl = document.getElementById('exp-' + item.id);
+        const cardEl = document.getElementById('card-' + item.id);
+        expEl.classList.remove('hidden');
+
+        const correctBtn = document.getElementById('opt-' + item.id + '-' + item.answer);
+        correctBtn.classList.remove('border-slate-200', 'text-slate-700', 'bg-indigo-600');
+        correctBtn.classList.add('bg-emerald-600', 'text-white', 'border-emerald-600', 'font-bold');
+
+        if (chosen === undefined) {
+          cardEl.classList.add('opacity-80');
+          expEl.className = 'mt-3 p-3 rounded-xl text-xs leading-relaxed bg-slate-100 text-slate-700 border border-slate-200';
+          expEl.innerHTML = '<strong>Skipped:</strong> ' + item.explanation;
+        } else if (chosen === item.answer) {
+          tfCorrect++;
+          cardEl.classList.add('border-emerald-400');
+          expEl.className = 'mt-3 p-3 rounded-xl text-xs leading-relaxed bg-emerald-50 text-emerald-950 border border-emerald-200';
+          expEl.innerHTML = '<strong>Correct (+1)!</strong> ' + item.explanation;
+        } else {
+          const wrongBtn = document.getElementById('opt-' + item.id + '-' + chosen);
+          wrongBtn.classList.remove('bg-indigo-600', 'border-indigo-600');
+          wrongBtn.classList.add('bg-rose-600', 'text-white', 'border-rose-600');
+          cardEl.classList.add('border-rose-400');
+          expEl.className = 'mt-3 p-3 rounded-xl text-xs leading-relaxed bg-rose-50 text-rose-950 border border-rose-200';
+          expEl.innerHTML = '<strong>Incorrect (0):</strong> ' + item.explanation;
+        }
+      });
+
+      jungMatchingItems.forEach(function (item) {
+        const chosenLetter = userMatching[item.id];
+        const correctDefObj = shuffledMatchingDefs.find(function (d) {
+          return d.sourceId === item.id;
+        });
+        const correctLetter = correctDefObj ? correctDefObj.letter : '';
+        const rowEl = document.getElementById('match-row-' + item.id);
+        const expEl = document.getElementById('match-exp-' + item.id);
+        expEl.classList.remove('hidden');
+
+        if (!chosenLetter) {
+          rowEl.classList.add('bg-amber-50/40');
+          expEl.className = 'mt-2 p-2.5 rounded-xl text-xs leading-relaxed bg-amber-50 text-amber-950 border border-amber-200';
+          expEl.innerHTML = '<strong>Left Blank (Never leave blanks on exam!):</strong> Correct match is <strong>' + correctLetter + '</strong> — ' + item.definition;
+        } else if (chosenLetter === correctLetter) {
+          matchRawCorrect++;
+          rowEl.classList.add('bg-emerald-50/50');
+          expEl.className = 'mt-2 p-2.5 rounded-xl text-xs leading-relaxed bg-emerald-50 text-emerald-950 border border-emerald-200';
+          expEl.innerHTML = '<strong>Correct (' + correctLetter + ')!</strong> ' + item.definition;
+        } else {
+          rowEl.classList.add('bg-rose-50/50');
+          expEl.className = 'mt-2 p-2.5 rounded-xl text-xs leading-relaxed bg-rose-50 text-rose-950 border border-rose-200';
+          expEl.innerHTML = '<strong>Incorrect (You chose ' + chosenLetter + '):</strong> Correct match is <strong>' + correctLetter + '</strong> — ' + item.definition;
+        }
+      });
+
+      const matchCappedScore = Math.min(matchRawCorrect, 10);
+      const totalScore = mcCorrect + tfCorrect + matchCappedScore;
+      const pct = Math.round((totalScore / 34) * 100);
+      const banner = document.getElementById('exam-result-banner');
+      banner.classList.remove('hidden');
+      document.getElementById('exam-score-text').textContent = totalScore + ' / 34 (' + pct + '%)';
+      document.getElementById('exam-feedback-sub').textContent =
+        'Part A (MC): ' + mcCorrect + '/16 • Part B (T/F): ' + tfCorrect + '/8 • Part C (Jung Matching): ' + matchCappedScore + '/10 (' + matchRawCorrect + '/12 raw matches with 2-miss buffer).';
+      banner.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    function resetPracticeExam() {
+      examGraded = false;
+      Object.keys(userSelections).forEach(function (k) {
+        delete userSelections[k];
+      });
+      Object.keys(userMatching).forEach(function (k) {
+        delete userMatching[k];
+      });
+      document.getElementById('exam-result-banner').classList.add('hidden');
+      renderPracticeQuestions();
+      initMatchingSection();
+      updateCounters();
+      showToast('Practice exam reset and matching definitions reshuffled!');
+    }
+
+    // =========================================================================
+    // 4. TWO-SIDED CUE CARD BUILDER & FLIP LOGIC
+    // =========================================================================
+    let currentMlkChoice = 'virtues';
+
+    const mlkCardTemplates = {
+      virtues:
+        '<p class="font-bold text-indigo-950 underline">MLK Q1 (Two Cardinal Virtues — Triple Value = 6 pts)</p>' +
+        '<p>• <strong>1. Justice ("I Have a Dream"):</strong> cashing promissory note at bank of justice; fierce urgency of now vs. gradualism; <em>"until justice rolls down like waters, and righteousness like a mighty stream."</em></p>' +
+        '<p>• <strong>2. Moderation / Temperance ("Paul’s Letter" &amp; "Dream"):</strong> true moderation = <em>"wise restraint and calm reasonableness"</em> (vice if slowing justice); disciplined nonviolence without bitterness: <em>"meeting physical force with soul force"</em> / <em>"Put up your sword."</em></p>',
+      sowell:
+        '<p class="font-bold text-indigo-950 underline">MLK Q2 (Constrained vs. Unconstrained Vision — 6 pts)</p>' +
+        '<p>• <strong>Unconstrained (moral optimism/progress):</strong> belief society can eradicate racism &amp; poverty via democratic action and love: <em>"wipe poverty from the face of the earth"</em> / <em>"transform the jangling discords of our nation into a beautiful symphony of brotherhood."</em></p>' +
+        '<p>• <strong>Constrained (flawed human nature/divine law):</strong> warns of ego, spiritual pride, and violent passions: <em>"Man has a tragic capacity to relegate a heightening virtue to a tragic vice"</em>; ultimate allegiance to eternal God, not Gallup poll majority.</p>'
+    };
+
+    function setMlkChoice(choice) {
+      currentMlkChoice = choice;
+      const btnV = document.getElementById('btn-mlk-virtues');
+      const btnS = document.getElementById('btn-mlk-sowell');
+
+      if (choice === 'virtues') {
+        btnV.className = 'w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-bold bg-indigo-600 text-white shadow-xs transition';
+        btnS.className = 'w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-semibold bg-white text-slate-700 border border-indigo-200 hover:bg-indigo-100/50 transition';
+      } else {
+        btnS.className = 'w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-bold bg-indigo-600 text-white shadow-xs transition';
+        btnV.className = 'w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-semibold bg-white text-slate-700 border border-indigo-200 hover:bg-indigo-100/50 transition';
+      }
+
+      document.getElementById('cuecard-mlk-back-content').innerHTML = mlkCardTemplates[choice];
+      document.getElementById('printable-mlk-slot').innerHTML = mlkCardTemplates[choice];
+    }
+
+    function flipCueCard() {
+      const inner = document.getElementById('flip-card-inner');
+      inner.classList.toggle('flipped');
+    }
+
+    function copyCueCardText() {
+      const sideA = document.querySelector('#printable-cards > div:first-child').innerText;
+      const sideB = document.querySelector('#printable-cards > div:last-child').innerText;
+      const fullText = sideA + '\n\n====================\n\n' + sideB;
+
+      const temp = document.createElement('textarea');
+      temp.value = fullText;
+      document.body.appendChild(temp);
+      temp.select();
+      try {
+        document.execCommand('copy');
+        showToast('Copied both sides of your 4"×6" cue card to clipboard!');
+      } catch (e) {
+        showToast('Unable to copy automatically; please highlight and copy from the layout below.');
+      }
+      document.body.removeChild(temp);
+    }
+
+    // Initialize immediately and on load
+    renderPracticeQuestions();
+    initMatchingSection();
+    setMlkChoice('virtues');
   </script>
 </body>
 </html>
